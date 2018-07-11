@@ -1,0 +1,13 @@
+﻿- Install DataTables via nuget, and reference in BundleConfig.cs
+- Install Toastr via nuget, and reference in BundleConfig.cs
+- Install Bootbox via ??, and reference in BundleConfig.cs
+- Install Elmah via nuget, and configure in Web.config
+
+- Add AuthorizeAttribute and RequireHttpsAttribute filters in FilterConfig.cs
+
+- Add MapMvcAttributeRoutes to routes in RouteConfig.cs
+
+- Add javascript Camelcase handling for Web API access in WebApiConfig.cs
+
+- Create custom 404.html page and add/adjust settings in Web.config
+
