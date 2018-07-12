@@ -225,6 +225,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-materia.css" />
     <Content Include="Content\bootstrap-materia.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
@@ -234,6 +235,7 @@
     <Content Include="Content\fontawesome\webfonts\fa-brands-400.svg" />
     <Content Include="Content\fontawesome\webfonts\fa-regular-400.svg" />
     <Content Include="Content\fontawesome\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\stock_Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

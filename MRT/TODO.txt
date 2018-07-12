@@ -11,3 +11,9 @@
 
 - Create custom 404.html page and add/adjust settings in Web.config
 
+- Implement color set:
+	9C27B0 purple
+	E31C51 pink
+	4A2E35 dark purple/brown
+	AFBA58 olive
+	E3D61C yellow

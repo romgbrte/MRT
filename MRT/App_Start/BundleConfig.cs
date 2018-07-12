@@ -21,7 +21,7 @@ namespace MRT
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap-materia.min.css",
+                      "~/Content/bootstrap-materia.css",
                       "~/Content/fontawesome/css/all.css",
                       "~/Content/site.css"));
         }
