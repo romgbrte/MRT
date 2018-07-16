@@ -1,4 +1,15 @@
-﻿- Install DataTables via nuget, and reference in BundleConfig.cs
+﻿- NEXT: finish updating tags and css on stock MVC pages
+	Done:
+		_Layout
+		_LoginPartial
+		Login
+		Register
+		Home/Index
+		Manage/Index
+	Partially Done:
+		Manage/Index
+
+- Install DataTables via nuget, and reference in BundleConfig.cs
 - Install Toastr via nuget, and reference in BundleConfig.cs
 - Install Bootbox via ??, and reference in BundleConfig.cs
 - Install Elmah via nuget, and configure in Web.config
@@ -11,9 +22,19 @@
 
 - Create custom 404.html page and add/adjust settings in Web.config
 
+- I would like dropdown menu items lined up better
+
 - Implement color set:
 	9C27B0 purple
 	E31C51 pink
 	4A2E35 dark purple/brown
 	AFBA58 olive
 	E3D61C yellow
+
+
+MRT Layout:
+	A [Carrier]
+	is under a current [Policy], re-written annually,
+	under which coverage is offered in certain [States]
+	for certain classes of jobs, which are denoted by [Codes]
+	and so a [Rate] is assigned for each Code in each State under each Carrier

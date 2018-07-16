@@ -8,6 +8,7 @@
 *.sln.docstates
 AppSettings.config
 ConnectionStrings.config
+TODO.txt
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
