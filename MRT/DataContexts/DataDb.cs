@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using MRT.Models;
 
 namespace MRT.DataContexts
 {
@@ -13,6 +14,7 @@ namespace MRT.DataContexts
         {
         }
 
-        // DbSets go here
+        // Model DbSets go here
+        public DbSet<State> States { get; set; }
     }
 }
