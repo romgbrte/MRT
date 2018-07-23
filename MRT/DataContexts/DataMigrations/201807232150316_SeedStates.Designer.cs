@@ -7,13 +7,13 @@ namespace MRT.DataContexts.DataMigrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class SeedStatesTable : IMigrationMetadata
+    public sealed partial class SeedStates : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedStatesTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SeedStates));
         
         string IMigrationMetadata.Id
         {
-            get { return "201807170406012_SeedStatesTable"; }
+            get { return "201807232150316_SeedStates"; }
         }
         
         string IMigrationMetadata.Source

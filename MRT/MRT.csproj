@@ -48,6 +48,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.7.1.1\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -218,9 +221,17 @@
     <Compile Include="DataContexts\DataMigrations\201807170030308_InitialCreate.Designer.cs">
       <DependentUpon>201807170030308_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataContexts\DataMigrations\201807170406012_SeedStatesTable.cs" />
-    <Compile Include="DataContexts\DataMigrations\201807170406012_SeedStatesTable.Designer.cs">
-      <DependentUpon>201807170406012_SeedStatesTable.cs</DependentUpon>
+    <Compile Include="DataContexts\DataMigrations\201807232150316_SeedStates.cs" />
+    <Compile Include="DataContexts\DataMigrations\201807232150316_SeedStates.Designer.cs">
+      <DependentUpon>201807232150316_SeedStates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DataMigrations\201807232154192_AddCodes.cs" />
+    <Compile Include="DataContexts\DataMigrations\201807232154192_AddCodes.Designer.cs">
+      <DependentUpon>201807232154192_AddCodes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DataMigrations\201807232156199_SeedCodes.cs" />
+    <Compile Include="DataContexts\DataMigrations\201807232156199_SeedCodes.Designer.cs">
+      <DependentUpon>201807232156199_SeedCodes.cs</DependentUpon>
     </Compile>
     <Compile Include="DataContexts\DataMigrations\Configuration.cs" />
     <Compile Include="DataContexts\IdentityDb.cs" />
@@ -233,6 +244,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Code.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\State.cs" />
@@ -314,8 +326,21 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <EmbeddedResource Include="DataContexts\DataMigrations\201807232150316_SeedStates.resx">
+      <DependentUpon>201807232150316_SeedStates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\DataMigrations\201807232154192_AddCodes.resx">
+      <DependentUpon>201807232154192_AddCodes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\DataMigrations\201807232156199_SeedCodes.resx">
+      <DependentUpon>201807232156199_SeedCodes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SeedData\dbo.States.data.sql" />
+    <EmbeddedResource Include="SeedData\dbo.Codes.data.sql" />
     <Content Include="TODO.txt" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -378,9 +403,6 @@
   <ItemGroup>
     <EmbeddedResource Include="DataContexts\DataMigrations\201807170030308_InitialCreate.resx">
       <DependentUpon>201807170030308_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DataContexts\DataMigrations\201807170406012_SeedStatesTable.resx">
-      <DependentUpon>201807170406012_SeedStatesTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\IdentityMigrations\201807132229257_InitialCreate.resx">
       <DependentUpon>201807132229257_InitialCreate.cs</DependentUpon>
