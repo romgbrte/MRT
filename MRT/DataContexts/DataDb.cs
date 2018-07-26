@@ -14,6 +14,11 @@ namespace MRT.DataContexts
         {
         }
 
+        public static DataDb Create()
+        {
+            return new DataDb();
+        }
+
         // Model DbSets go here
         public DbSet<State> States { get; set; }
         public DbSet<Code> Codes { get; set; }

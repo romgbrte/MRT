@@ -6,8 +6,6 @@
 *.user
 *.userosscache
 *.sln.docstates
-AppSettings.config
-ConnectionStrings.config
 TODO.txt
 NCCI_Codes_UTF8_Full_Formatted.csv
 
