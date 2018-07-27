@@ -16,7 +16,11 @@
 
 - Create custom 404.html page and add/adjust settings in Web.config
 
-- I would like dropdown menu items lined up better
+- I would like dropdown menu items lined up 
+
+- Fix DataTables select dropdown not showing the number of items per page
+
+- Have a loading bar or something for when api requests are being loaded into DataTables
 
 - Implement color set:
 	9C27B0 purple
