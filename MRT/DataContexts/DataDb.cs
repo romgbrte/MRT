@@ -22,5 +22,6 @@ namespace MRT.DataContexts
         // Model DbSets go here
         public DbSet<State> States { get; set; }
         public DbSet<Code> Codes { get; set; }
+        public DbSet<Carrier> Carriers { get; set; }
     }
 }

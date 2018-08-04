@@ -1,0 +1,34 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Carrier List</h3>
+<hr />
+<table id="carriersTable" class="table table-sm table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Base Rate</th>
+            <th>Current Policy</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#carriersTable').DataTable({
+                ajax: {
+                    url: '/api/carriers',
+                    dataSrc: ''
+                },
+                columns: [
+                    { data: 'name' },
+                    { data: 'baseRate' },
+                    { data: 'currentPolicyId' }
+                ]
+            });
+        });
+    </script>
+}

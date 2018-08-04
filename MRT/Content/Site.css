@@ -1,5 +1,6 @@
 ﻿body {
-    padding-top: 3em;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
 }
 
 .navbar {
@@ -8,8 +9,8 @@
 }
 
 .navbar-brand {
-    padding-bottom: 0;
     padding-top: 0;
+    padding-bottom: 0;
     font-size: 1.75rem;
 }
 
@@ -31,6 +32,10 @@
 .nav-item > .dropdown-menu > a:hover,
 .nav-item > .dropdown-menu > form > a:hover {
     background-color: #771e86;
+}
+
+.dataTables_length > label > select {
+    padding: 0 0.5rem;
 }
 
 @media (min-width: 768px) {

@@ -15,6 +15,10 @@ namespace MRT.App_Start
             CreateMap<Code, CodeDto>() // Creates the initial Code => CodeDto mapping
                 .ReverseMap() // Creates the reverse mapping, CodeDto => Code
                 .ForMember(c => c.Id, opt => opt.Ignore()); // Omits Id from the reverse mapping
+
+            CreateMap<Carrier, CarrierDto>() // Creates the initial Code => CodeDto mapping
+                .ReverseMap() // Creates the reverse mapping, CodeDto => Code
+                .ForMember(c => c.Id, opt => opt.Ignore()); // Omits Id from the reverse mapping
         }
     }
 }

@@ -9,10 +9,10 @@ using AutoMapper;
 
 namespace MRT.Controllers.Api
 {
-    public class CodesController : ApiController
+    public class CarriersController : ApiController
     {
         private DataDb _context;
-        public CodesController()
+        public CarriersController()
         {
             _context = new DataDb();
         }
@@ -21,13 +21,13 @@ namespace MRT.Controllers.Api
             _context.Dispose();
         }
 
-        // GET /api/codes
+        // GET /api/carriers
         [HttpGet]
-        public IHttpActionResult GetCodes()
+        public IHttpActionResult GetCarriers()
         {
-            var codeDtos = _context.Codes.ToList().Select(Mapper.Map<Code, CodeDto>);
+            var carrierDtos = _context.Carriers.ToList().Select(Mapper.Map<Carrier, CarrierDto>);
 
-            return Ok(codeDtos);
+            return Ok(carrierDtos);
         }
     }
 }

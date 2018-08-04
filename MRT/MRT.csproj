@@ -54,6 +54,9 @@
     <Reference Include="CsvHelper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
       <HintPath>..\packages\CsvHelper.7.1.1\lib\net45\CsvHelper.dll</HintPath>
     </Reference>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -222,7 +225,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\CarriersController.cs" />
     <Compile Include="Controllers\Api\CodesController.cs" />
+    <Compile Include="Controllers\CarriersController.cs" />
     <Compile Include="Controllers\CodesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -244,6 +249,14 @@
     <Compile Include="DataContexts\DataMigrations\201807232156199_SeedCodes.Designer.cs">
       <DependentUpon>201807232156199_SeedCodes.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\DataMigrations\201808032228515_AddCarriers.cs" />
+    <Compile Include="DataContexts\DataMigrations\201808032228515_AddCarriers.Designer.cs">
+      <DependentUpon>201808032228515_AddCarriers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DataMigrations\201808032230360_SeedCarriers.cs" />
+    <Compile Include="DataContexts\DataMigrations\201808032230360_SeedCarriers.Designer.cs">
+      <DependentUpon>201808032230360_SeedCarriers.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\DataMigrations\Configuration.cs" />
     <Compile Include="DataContexts\IdentityDb.cs" />
     <Compile Include="DataContexts\IdentityMigrations\201807132229257_InitialCreate.cs" />
@@ -251,19 +264,25 @@
       <DependentUpon>201807132229257_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="DataContexts\IdentityMigrations\Configuration.cs" />
+    <Compile Include="Dtos\CarrierDto.cs" />
     <Compile Include="Dtos\CodeDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Carrier.cs" />
     <Compile Include="Models\Code.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Policy.cs" />
+    <Compile Include="Models\WCRate.cs" />
     <Compile Include="Models\State.cs" />
+    <Compile Include="Models\StateCoverage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-materia.css" />
@@ -581,6 +600,12 @@
     <EmbeddedResource Include="DataContexts\DataMigrations\201807232156199_SeedCodes.resx">
       <DependentUpon>201807232156199_SeedCodes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\DataMigrations\201808032228515_AddCarriers.resx">
+      <DependentUpon>201808032228515_AddCarriers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\DataMigrations\201808032230360_SeedCarriers.resx">
+      <DependentUpon>201808032230360_SeedCarriers.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SeedData\dbo.States.data.sql" />
     <EmbeddedResource Include="SeedData\dbo.Codes.data.sql" />
     <Content Include="TODO.txt" />
@@ -629,16 +654,13 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Codes\Create.cshtml" />
-    <Content Include="Views\Codes\Delete.cshtml" />
-    <Content Include="Views\Codes\Details.cshtml" />
-    <Content Include="Views\Codes\Edit.cshtml" />
     <Content Include="Views\Codes\Index.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\Internal.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
     <Content Include="Views\Error\BadRequest.cshtml" />
+    <Content Include="Views\Carriers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
