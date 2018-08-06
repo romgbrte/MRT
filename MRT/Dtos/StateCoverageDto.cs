@@ -3,10 +3,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using MRT.Models;
 
-namespace MRT.Models
+namespace MRT.Dtos
 {
-    public class WCRate
+    public class StateCoverageDto
     {
         public int Id { get; set; }
 
@@ -16,14 +17,6 @@ namespace MRT.Models
         [Required]
         public int StateId { get; set; }
 
-        [Required]
-        public int CodeId { get; set; }
-
-        public DateTime EffectiveDate { get; set; }
-
-        [Range(0.001, 100.000)]
-        public float Rate { get; set; }
-
-        public bool IsActive { get; set; }
+        public State State { get; set; }
     }
 }

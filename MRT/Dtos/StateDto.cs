@@ -3,11 +3,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using MRT.Models;
 
 namespace MRT.Dtos
 {
-    public class CarrierDto
+    public class StateDto
     {
         public int Id { get; set; }
 
@@ -16,13 +15,7 @@ namespace MRT.Dtos
         public string Name { get; set; }
 
         [Required]
-        [Range(0.001, 100.000)]
-        public float BaseRate { get; set; }
-        
-        public int? CurrentPolicyId { get; set; }
-
-        //public Policy CurrentPolicy { get; set; }
-        
-        public List<StateCoverage> StatesCovered { get; set; }
+        [StringLength(2)]
+        public string Abbreviation { get; set; }
     }
 }

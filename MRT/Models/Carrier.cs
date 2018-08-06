@@ -26,6 +26,6 @@ namespace MRT.Models
         //public Policy CurrentPolicy { get; set; }
 
         [Display(Name = "States Covered")]
-        public IEnumerable<StateCoverage> StatesCovered { get; set; }
+        public List<StateCoverage> StatesCovered { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -25,9 +26,20 @@ namespace MRT.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetCarriers()
         {
-            var carrierDtos = _context.Carriers.ToList().Select(Mapper.Map<Carrier, CarrierDto>);
+            var carriers = _context.Carriers.ToList();
+            var statesCovered = _context
+                .StateCoverages
+                .Include(s => s.State)
+                .ToList();
 
-            return Ok(carrierDtos);
+            foreach(var carrier in carriers)
+            {
+                carrier.StatesCovered = statesCovered
+                    .Where(s => s.CarrierId == carrier.Id)
+                    .ToList();
+            }
+
+            return Ok(carriers.Select(Mapper.Map<Carrier, CarrierDto>));
         }
     }
 }

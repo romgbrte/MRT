@@ -12,13 +12,11 @@
 - Install Toastr via nuget, and reference in BundleConfig.cs
 - Install Bootbox via ??, and reference in BundleConfig.cs
 
-- I would like dropdown menu items lined up 
-
-- Fix DataTables select dropdown not showing the number of items per page
+- I would like dropdown menu items lined up
 
 - Have a loading bar or something for when api requests are being loaded into DataTables
 
-- Resizing the page doesn't cause the DataTable to automatically resize (must reload page) on Carriers, at least
+- DataTables aren't responsive to window resizing
 
 - Implement color set:
 	9C27B0 purple

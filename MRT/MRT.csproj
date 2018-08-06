@@ -257,6 +257,18 @@
     <Compile Include="DataContexts\DataMigrations\201808032230360_SeedCarriers.Designer.cs">
       <DependentUpon>201808032230360_SeedCarriers.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\DataMigrations\201808042038125_AddStateCoverages.cs" />
+    <Compile Include="DataContexts\DataMigrations\201808042038125_AddStateCoverages.Designer.cs">
+      <DependentUpon>201808042038125_AddStateCoverages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DataMigrations\201808042051046_SeedStateCoverages.cs" />
+    <Compile Include="DataContexts\DataMigrations\201808042051046_SeedStateCoverages.Designer.cs">
+      <DependentUpon>201808042051046_SeedStateCoverages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DataMigrations\201808051929404_ChangedStateCoveragesTypeInCarrier.cs" />
+    <Compile Include="DataContexts\DataMigrations\201808051929404_ChangedStateCoveragesTypeInCarrier.Designer.cs">
+      <DependentUpon>201808051929404_ChangedStateCoveragesTypeInCarrier.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\DataMigrations\Configuration.cs" />
     <Compile Include="DataContexts\IdentityDb.cs" />
     <Compile Include="DataContexts\IdentityMigrations\201807132229257_InitialCreate.cs" />
@@ -266,6 +278,9 @@
     <Compile Include="DataContexts\IdentityMigrations\Configuration.cs" />
     <Compile Include="Dtos\CarrierDto.cs" />
     <Compile Include="Dtos\CodeDto.cs" />
+    <Compile Include="Dtos\PolicyDto.cs" />
+    <Compile Include="Dtos\StateCoverageDto.cs" />
+    <Compile Include="Dtos\StateDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -605,6 +620,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataContexts\DataMigrations\201808032230360_SeedCarriers.resx">
       <DependentUpon>201808032230360_SeedCarriers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\DataMigrations\201808042038125_AddStateCoverages.resx">
+      <DependentUpon>201808042038125_AddStateCoverages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\DataMigrations\201808042051046_SeedStateCoverages.resx">
+      <DependentUpon>201808042051046_SeedStateCoverages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\DataMigrations\201808051929404_ChangedStateCoveragesTypeInCarrier.resx">
+      <DependentUpon>201808051929404_ChangedStateCoveragesTypeInCarrier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\dbo.States.data.sql" />
     <EmbeddedResource Include="SeedData\dbo.Codes.data.sql" />
