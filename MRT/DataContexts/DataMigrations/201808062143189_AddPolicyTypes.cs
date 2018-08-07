@@ -3,17 +3,16 @@ namespace MRT.DataContexts.DataMigrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddCarriers : DbMigration
+    public partial class AddPolicyTypes : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.Carriers",
+                "dbo.PolicyTypes",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 50),
-                        BaseRate = c.Single(nullable: false),
+                        Id = c.Byte(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 20),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -21,7 +20,7 @@ namespace MRT.DataContexts.DataMigrations
         
         public override void Down()
         {
-            DropTable("dbo.Carriers");
+            DropTable("dbo.PolicyTypes");
         }
     }
 }

@@ -19,10 +19,6 @@ namespace MRT.Dtos
         [Range(0.001, 100.000)]
         public float BaseRate { get; set; }
         
-        public int? CurrentPolicyId { get; set; }
-
-        //public Policy CurrentPolicy { get; set; }
-        
         public List<StateCoverage> StatesCovered { get; set; }
     }
 }

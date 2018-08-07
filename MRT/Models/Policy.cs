@@ -15,12 +15,6 @@ namespace MRT.Models
         [Display(Name = "Policy Number")]
         public string Number { get; set; }
 
-        [Required]
-        [Display(Name = "Carrier")]
-        public int CarrierId { get; set; }
-
-        public Carrier Carrier { get; set; }
-
         [Display(Name = "Effective Date")]
         public DateTime StartDate { get; set; }
 
@@ -29,7 +23,9 @@ namespace MRT.Models
 
         [Required]
         [Display(Name = "Policy Type")]
-        public byte Type { get; set; }
+        public byte PolicyTypeId { get; set; }
+
+        public PolicyType PolicyType { get; set; }
 
         [Required]
         [Range(0.001, 100.000)]

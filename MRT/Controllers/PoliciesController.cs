@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +9,10 @@ using MRT.DataContexts;
 
 namespace MRT.Controllers
 {
-    public class CarriersController : Controller
+    public class PoliciesController : Controller
     {
         private DataDb _context;
-        public CarriersController()
+        public PoliciesController()
         {
             _context = new DataDb();
         }
@@ -20,12 +21,12 @@ namespace MRT.Controllers
             _context.Dispose();
         }
 
-        // GET: Carriers
+        // GET: Policies
         [HttpGet]
         public ActionResult Index()
         {
-            ViewBag.Title = "Carriers";
-            ViewBag.CarriersActive = "active";
+            ViewBag.Title = "Policies";
+            ViewBag.PoliciesActive = "active";
             return View();
         }
     }

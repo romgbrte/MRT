@@ -1,0 +1,36 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Policy List</h3>
+<hr />
+<table id="policiesTable" class="table table-sm table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Number</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Type</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var table = $('#policiesTable').DataTable({
+                ajax: {
+                    url: '/api/policies',
+                    dataSrc: ''
+                },
+                columns: [
+                    { data: 'number' },
+                    { data: 'startDateString' },
+                    { data: 'endDateString' },
+                    { data: 'policyType.name' }
+                ]
+            });
+        });
+    </script>
+}

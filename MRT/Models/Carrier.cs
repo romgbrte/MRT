@@ -20,11 +20,6 @@ namespace MRT.Models
         [Display(Name = "Carrier Base Rate")]
         public float BaseRate { get; set; }
 
-        [Display(Name = "Current Policy")]
-        public int? CurrentPolicyId { get; set; }
-
-        //public Policy CurrentPolicy { get; set; }
-
         [Display(Name = "States Covered")]
         public List<StateCoverage> StatesCovered { get; set; }
     }

@@ -24,9 +24,13 @@ namespace MRT.App_Start
                 .ReverseMap()
                 .ForMember(c => c.Id, opt => opt.Ignore());
 
-            CreateMap<State, StateDto>()
+            CreateMap<State, StateDto>();
+
+            CreateMap<Policy, PolicyDto>()
                 .ReverseMap()
                 .ForMember(c => c.Id, opt => opt.Ignore());
+
+            CreateMap<PolicyType, PolicyTypeDto>();
         }
     }
 }

@@ -227,11 +227,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CarriersController.cs" />
     <Compile Include="Controllers\Api\CodesController.cs" />
+    <Compile Include="Controllers\Api\PoliciesController.cs" />
     <Compile Include="Controllers\CarriersController.cs" />
     <Compile Include="Controllers\CodesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PoliciesController.cs" />
     <Compile Include="DataContexts\DataDb.cs" />
     <Compile Include="DataContexts\DataMigrations\201807170030308_InitialCreate.cs" />
     <Compile Include="DataContexts\DataMigrations\201807170030308_InitialCreate.Designer.cs">
@@ -269,6 +271,26 @@
     <Compile Include="DataContexts\DataMigrations\201808051929404_ChangedStateCoveragesTypeInCarrier.Designer.cs">
       <DependentUpon>201808051929404_ChangedStateCoveragesTypeInCarrier.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataContexts\DataMigrations\201808062143189_AddPolicyTypes.cs" />
+    <Compile Include="DataContexts\DataMigrations\201808062143189_AddPolicyTypes.Designer.cs">
+      <DependentUpon>201808062143189_AddPolicyTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DataMigrations\201808062144244_SeedPolicyTypes.cs" />
+    <Compile Include="DataContexts\DataMigrations\201808062144244_SeedPolicyTypes.Designer.cs">
+      <DependentUpon>201808062144244_SeedPolicyTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DataMigrations\201808062235287_RemovePolicyFromCarrier.cs" />
+    <Compile Include="DataContexts\DataMigrations\201808062235287_RemovePolicyFromCarrier.Designer.cs">
+      <DependentUpon>201808062235287_RemovePolicyFromCarrier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DataMigrations\201808062244354_AddPolicies.cs" />
+    <Compile Include="DataContexts\DataMigrations\201808062244354_AddPolicies.Designer.cs">
+      <DependentUpon>201808062244354_AddPolicies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DataContexts\DataMigrations\201808062246388_SeedPolicies.cs" />
+    <Compile Include="DataContexts\DataMigrations\201808062246388_SeedPolicies.Designer.cs">
+      <DependentUpon>201808062246388_SeedPolicies.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataContexts\DataMigrations\Configuration.cs" />
     <Compile Include="DataContexts\IdentityDb.cs" />
     <Compile Include="DataContexts\IdentityMigrations\201807132229257_InitialCreate.cs" />
@@ -279,6 +301,7 @@
     <Compile Include="Dtos\CarrierDto.cs" />
     <Compile Include="Dtos\CodeDto.cs" />
     <Compile Include="Dtos\PolicyDto.cs" />
+    <Compile Include="Dtos\PolicyTypeDto.cs" />
     <Compile Include="Dtos\StateCoverageDto.cs" />
     <Compile Include="Dtos\StateDto.cs" />
     <Compile Include="Global.asax.cs">
@@ -290,6 +313,8 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Policy.cs" />
+    <Compile Include="Models\PolicyAssignment.cs" />
+    <Compile Include="Models\PolicyType.cs" />
     <Compile Include="Models\WCRate.cs" />
     <Compile Include="Models\State.cs" />
     <Compile Include="Models\StateCoverage.cs" />
@@ -630,6 +655,21 @@
     <EmbeddedResource Include="DataContexts\DataMigrations\201808051929404_ChangedStateCoveragesTypeInCarrier.resx">
       <DependentUpon>201808051929404_ChangedStateCoveragesTypeInCarrier.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\DataMigrations\201808062143189_AddPolicyTypes.resx">
+      <DependentUpon>201808062143189_AddPolicyTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\DataMigrations\201808062144244_SeedPolicyTypes.resx">
+      <DependentUpon>201808062144244_SeedPolicyTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\DataMigrations\201808062235287_RemovePolicyFromCarrier.resx">
+      <DependentUpon>201808062235287_RemovePolicyFromCarrier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\DataMigrations\201808062244354_AddPolicies.resx">
+      <DependentUpon>201808062244354_AddPolicies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataContexts\DataMigrations\201808062246388_SeedPolicies.resx">
+      <DependentUpon>201808062246388_SeedPolicies.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SeedData\dbo.States.data.sql" />
     <EmbeddedResource Include="SeedData\dbo.Codes.data.sql" />
     <Content Include="TODO.txt" />
@@ -685,6 +725,7 @@
     <Content Include="Views\Error\AccessDenied.cshtml" />
     <Content Include="Views\Error\BadRequest.cshtml" />
     <Content Include="Views\Carriers\Index.cshtml" />
+    <Content Include="Views\Policies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
