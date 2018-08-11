@@ -26,20 +26,22 @@ namespace MRT.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetCarriers()
         {
-            var carriers = _context.Carriers.ToList();
-            var statesCovered = _context
-                .StateCoverages
+            var carrierDtos = _context.Carriers
+                .ToList()
+                .Select(Mapper.Map<Carrier, CarrierDto>);
+            var stateCoverageDtos = _context.StateCoverages
                 .Include(s => s.State)
-                .ToList();
+                .ToList()
+                .Select(Mapper.Map<StateCoverage, StateCoverageDto>);
 
-            foreach(var carrier in carriers)
+            foreach(var carrier in carrierDtos)
             {
-                carrier.StatesCovered = statesCovered
-                    .Where(s => s.CarrierId == carrier.Id)
+                carrier.StatesCovered = stateCoverageDtos
+                    .Where(c => c.CarrierId == carrier.Id)
                     .ToList();
             }
 
-            return Ok(carriers.Select(Mapper.Map<Carrier, CarrierDto>));
+            return Ok(carrierDtos);
         }
     }
 }

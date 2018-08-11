@@ -4,23 +4,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace MRT.Models
+namespace MRT.Dtos
 {
-    public class WCRate
+    public class WCRateDto
     {
         public int Id { get; set; }
 
         [Required]
         public int CarrierId { get; set; }
-        public Carrier Carrier { get; set; }
+        public string CarrierName { get; set; }
 
         [Required]
         public int StateId { get; set; }
-        public State State { get; set; }
+        public string StateName { get; set; }
 
         [Required]
         public int CodeId { get; set; }
-        public Code Code { get; set; }
+        public string CodeNumber { get; set; }
 
         [Required]
         public DateTime EffectiveDate { get; set; }

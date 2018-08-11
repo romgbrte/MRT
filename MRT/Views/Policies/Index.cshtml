@@ -25,7 +25,12 @@
                     dataSrc: ''
                 },
                 columns: [
-                    { data: 'number' },
+                    {
+                        data: 'id',
+                        render: function (data, type, policy) {
+                            return '<a href="/api/policies/edit/' + policy.id + '">' + policy.number + '</a>';
+                        }
+                    },
                     { data: 'startDateString' },
                     { data: 'endDateString' },
                     { data: 'policyType.name' }

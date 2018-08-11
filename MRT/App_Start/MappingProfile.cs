@@ -22,15 +22,24 @@ namespace MRT.App_Start
 
             CreateMap<StateCoverage, StateCoverageDto>()
                 .ReverseMap()
-                .ForMember(c => c.Id, opt => opt.Ignore());
+                .ForMember(sc => sc.Id, opt => opt.Ignore());
 
             CreateMap<State, StateDto>();
 
             CreateMap<Policy, PolicyDto>()
                 .ReverseMap()
-                .ForMember(c => c.Id, opt => opt.Ignore());
+                .ForMember(p => p.Id, opt => opt.Ignore());
 
             CreateMap<PolicyType, PolicyTypeDto>();
+
+            CreateMap<PolicyAssignment, PolicyAssignmentDto>()
+                .ReverseMap()
+                .ForMember(sc => sc.Id, opt => opt.Ignore());
+
+            CreateMap<WCRate, WCRateDto>()
+                .ForMember(dest => dest.CarrierName, opt => opt.MapFrom(src => src.Carrier.Name))
+                .ForMember(dest => dest.StateName, opt => opt.MapFrom(src => src.State.Abbreviation))
+                .ForMember(dest => dest.CodeNumber, opt => opt.MapFrom(src => src.Code.Number));
         }
     }
 }

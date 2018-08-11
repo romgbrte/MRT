@@ -18,13 +18,14 @@ namespace MRT.DataContexts
         {
             return new DataDb();
         }
-
-        // Model DbSets go here
+        
         public DbSet<State> States { get; set; }
         public DbSet<Code> Codes { get; set; }
         public DbSet<Carrier> Carriers { get; set; }
         public DbSet<StateCoverage> StateCoverages { get; set; }
         public DbSet<PolicyType> PolicyTypes { get; set; }
         public DbSet<Policy> Policies { get; set; }
+        public DbSet<PolicyAssignment> PolicyAssignments { get; set; }
+        public DbSet<WCRate> WCRates { get; set; }
     }
 }

@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>WC Rates List</h3>
+<hr />
+<table id="wcratesTable" class="table table-sm table-striped table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Carrier</th>
+            <th>State</th>
+            <th>Code</th>
+            <th>Rate</th>
+            <th>Active?</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var table = $('#wcratesTable').DataTable({
+                ajax: {
+                    url: '/api/wcrates',
+                    dataSrc: ''
+                },
+                columns: [
+                    { data: 'wcrate.carrierName' },
+                    { data: 'wcrate.stateName' },
+                    { data: 'wcrate.codeNumber' },
+                    { data: 'rate' },
+                    { data: 'isActive' }
+                ]
+            });
+        });
+    </script>
+}

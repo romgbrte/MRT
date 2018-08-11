@@ -9,7 +9,7 @@
         <tr>
             <th>Name</th>
             <th>Base Rate</th>
-            <!--<th>States Covered</th>-->
+            <th>States Covered</th>
         </tr>
     </thead>
     <tbody></tbody>
@@ -24,18 +24,14 @@
                     dataSrc: ''
                 },
                 columns: [
-                    { data: 'name' },
-                    { data: 'baseRate' }/*,
                     {
-                        data: 'statesCovered',
+                        data: 'id',
                         render: function (data, type, carrier) {
-                            var carrierStates = carrier.statesCovered;
-                            var states = '';
-                            for (var i = 0; i < carrierStates.length; i++)
-                                states += carrierStates[i].state.abbreviation + ', ';
-                            return '<label>' + states + '</label>';
+                            return '<a href="/api/carriers/edit/' + carrier.id + '">' + carrier.name + '</a>';
                         }
-                    }*/
+                    },
+                    { data: 'baseRate' },
+                    { data: 'statesCoveredString' }
                 ]
             });
         });
