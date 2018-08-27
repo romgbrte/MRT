@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 3rem;
+    padding-top: 2.5rem;
     padding-bottom: 3rem;
 }
 
@@ -34,7 +34,36 @@
     background-color: #771e86;
 }
 
-.dataTables_length > label > select {
+.dataTable a:link,
+.form-group a:link,
+.form-group a,
+.list-group-item > a > i {
+    color: #9C27B0 !important;
+}
+
+.dataTable a:visited {
+    color: #BD9A3D;
+}
+
+.field-validation-error {
+    color: #E31C51;
+}
+
+.input-validation-error {
+    border: 2px groove #E31C51;
+    border-radius: 4px 4px;
+}
+
+.form-control.btn-info:focus,
+.form-control.btn-outline-info:focus:hover {
+    color: white;
+}
+
+.form-control.btn-outline-info:focus {
+    color: #9C27B0;
+}
+
+select.form-control {
     padding: 0 0.5rem;
 }
 
@@ -42,12 +71,20 @@
     .navbar {
         border-bottom: #9C27B0 5px solid;
     }
+    .dt_topbar_element {
+        padding-left: 0.2rem !important;
+    }
 }
 
 @media (max-width: 767px) {
     .navbar-brand {
-        padding-top: 0.34765625rem;
-        padding-bottom: 0.34765625rem;
-        padding-left: 0.25rem;
+        padding: 0.34765625rem 0.34765625rem;
     }
+    .dt_topbar_element {
+        margin-right: auto !important;
+    }
+    .navbar-toggler {
+        margin-right: 0.34765625rem;
+    }
+
 }

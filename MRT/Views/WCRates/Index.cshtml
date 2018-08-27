@@ -2,8 +2,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>WC Rates List</h3>
-<hr />
 <table id="wcratesTable" class="table table-sm table-striped table-hover">
     <thead class="thead-dark">
         <tr>
@@ -21,6 +19,8 @@
     <script>
         $(document).ready(function () {
             var table = $('#wcratesTable').DataTable({
+                //dom: '<<"dataTables_customToolbar">lf<rt>ip>',
+                dom: '<lf<rt>ip>',
                 ajax: {
                     url: '/api/wcrates',
                     dataSrc: ''
@@ -33,6 +33,13 @@
                     { data: 'isActive' }
                 ]
             });
+
+            //$('div.dataTables_customToolbar').html('<a href="" class="btn btn-sm btn-info text-capitalize font-weight-bold"><i class="fas fa-plus pr-1" />New WC Rate</a>');
+            //$('.dataTables_customToolbar').addClass('col-sm-auto text-center mb-2 dt_topbar_element');
+            $('.dataTables_length').addClass('col-sm-auto dt_topbar_element');
+            $('.dataTables_filter').addClass('col-sm-auto ml-md-auto dt_topbar_element');
+            $('.dt_topbar_element')
+                .wrapAll('<div class="dt_topbar container"><div class="row"></div></div>');
         });
     </script>
 }

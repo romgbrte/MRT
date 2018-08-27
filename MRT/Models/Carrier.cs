@@ -19,8 +19,5 @@ namespace MRT.Models
         [Range(0.001, 100.000)]
         [Display(Name = "Carrier Base Rate")]
         public float BaseRate { get; set; }
-
-        [Display(Name = "States Covered")]
-        public List<StateCoverage> StatesCovered { get; set; }
     }
 }

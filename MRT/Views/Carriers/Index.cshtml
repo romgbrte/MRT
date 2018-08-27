@@ -2,13 +2,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>Carrier List</h3>
-<hr />
 <table id="carriersTable" class="table table-sm table-striped table-hover">
     <thead class="thead-dark">
         <tr>
             <th>Name</th>
-            <th>Base Rate</th>
+            <th>Base Rate &lpar;&percnt;&rpar;</th>
             <th>States Covered</th>
         </tr>
     </thead>
@@ -19,6 +17,7 @@
     <script>
         $(document).ready(function () {
             var table = $('#carriersTable').DataTable({
+                dom: '<<"dataTables_customToolbar">lf<rt>ip>',
                 ajax: {
                     url: '/api/carriers',
                     dataSrc: ''
@@ -27,13 +26,21 @@
                     {
                         data: 'id',
                         render: function (data, type, carrier) {
-                            return '<a href="/api/carriers/edit/' + carrier.id + '">' + carrier.name + '</a>';
+                            return '<a href="/carriers/edit/' + carrier.id + '">' + carrier.name + '</a>';
                         }
                     },
                     { data: 'baseRate' },
                     { data: 'statesCoveredString' }
                 ]
             });
+
+            $('div.dataTables_customToolbar')
+                .html('<a href="/carriers/new" class="btn btn-sm btn-info text-capitalize font-weight-bold"><i class="fas fa-plus pr-1" />New Carrier</a>');
+            $('.dataTables_customToolbar').addClass('col-sm-auto text-center mb-2 dt_topbar_element');
+            $('.dataTables_length').addClass('col-sm-auto dt_topbar_element');
+            $('.dataTables_filter').addClass('col-sm-auto ml-md-auto dt_topbar_element');
+            $('.dt_topbar_element')
+                .wrapAll('<div class="dt_topbar container"><div class="row"></div></div>');
         });
     </script>
 }

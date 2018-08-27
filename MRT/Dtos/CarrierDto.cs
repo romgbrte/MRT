@@ -17,14 +17,16 @@ namespace MRT.Dtos
         [Required]
         [Range(0.001, 100.000)]
         public float BaseRate { get; set; }
+        
+        public List<StateDto> StatesCovered { get; set; }
 
-        public List<StateCoverageDto> StatesCovered { get; set; }
+        public List<StateDto> StatesNotCovered { get; set; }
 
         public string StatesCoveredString
         {
             get
             {
-                return String.Join(", ", StatesCovered.Select(s => s.State.Abbreviation));
+                return StatesCovered == null ? "--" : string.Join(", ", StatesCovered.Select(s => s.Abbreviation));
             }
         }
     }

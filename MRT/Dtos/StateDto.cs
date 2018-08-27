@@ -10,11 +10,9 @@ namespace MRT.Dtos
     {
         public int Id { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string Name { get; set; }
 
-        [Required]
         [StringLength(2)]
         public string Abbreviation { get; set; }
     }

@@ -10,6 +10,7 @@ namespace MRT.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Title = "My Rate Tables";
             return View();
         }
 

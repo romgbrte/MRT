@@ -27,18 +27,21 @@ namespace MRT.Controllers.Api
         public IHttpActionResult GetCarriers()
         {
             var carrierDtos = _context.Carriers
-                .ToList()
-                .Select(Mapper.Map<Carrier, CarrierDto>);
-            var stateCoverageDtos = _context.StateCoverages
-                .Include(s => s.State)
-                .ToList()
-                .Select(Mapper.Map<StateCoverage, StateCoverageDto>);
+                .Select(Mapper.Map<Carrier, CarrierDto>)
+                .ToList();
+            var stateCoverages = _context.StateCoverages.ToList();
+            var states = _context.States.ToList();
 
-            foreach(var carrier in carrierDtos)
+            foreach (var carrierDto in carrierDtos)
             {
-                carrier.StatesCovered = stateCoverageDtos
-                    .Where(c => c.CarrierId == carrier.Id)
+                var carrierStates = stateCoverages
+                    .Where(c => c.CarrierId == carrierDto.Id)
+                    .Select(s => s.StateId)
                     .ToList();
+                carrierDto.StatesCovered = states.Where(s => carrierStates.Contains(s.Id))
+                    .Select(Mapper.Map<State, StateDto>)
+                    .ToList();
+                carrierDto.StatesNotCovered = new List<StateDto>();
             }
 
             return Ok(carrierDtos);
