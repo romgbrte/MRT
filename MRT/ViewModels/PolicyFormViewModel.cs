@@ -17,12 +17,14 @@ namespace MRT.ViewModels
         [Display(Name = "Policy Number")]
         public string Number { get; set; }
 
+        [Required]
         [IsStartDateWithinTheNextYear]
-        [Display(Name = "Effective Date")]
+        [Display(Name = "Effective Date (YYYY-MM-DD)")]
         public DateTime StartDate { get; set; }
 
+        [Required]
         [IsEndDateWithinTheNextTwoYears]
-        [Display(Name = "Effective Until")]
+        [Display(Name = "Effective Until (YYYY-MM-DD)")]
         public DateTime EndDate { get; set; }
 
         [Required]

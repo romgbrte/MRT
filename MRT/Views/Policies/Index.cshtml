@@ -2,13 +2,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<table id="policiesTable" class="table table-sm table-striped table-hover">
+<table id="policyAssignmentsTable" class="table table-sm table-striped table-hover">
     <thead class="thead-dark">
         <tr>
             <th>Number</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Type</th>
+            <th>Carrier</th>
+            <th>Active?</th>
         </tr>
     </thead>
     <tbody></tbody>
@@ -17,22 +16,26 @@
 @section scripts{
     <script>
         $(document).ready(function () {
-            var table = $('#policiesTable').DataTable({
+            var table = $('#policyAssignmentsTable').DataTable({
                 dom: '<<"dataTables_customToolbar">lf<rt>ip>',
                 ajax: {
-                    url: '/api/policies',
+                    url: '/api/policyassignments',
                     dataSrc: ''
                 },
                 columns: [
                     {
-                        data: 'id',
-                        render: function (data, type, policy) {
-                            return '<a href="/policies/edit/' + policy.id + '">' + policy.number + '</a>';
+                        data: 'policy',
+                        render: function (data, type, policyAssignment) {
+                            return '<a href="/policies/edit/' + policyAssignment.policy.id + '">' + policyAssignment.policy.number + '</a>';
                         }
                     },
-                    { data: 'startDateString' },
-                    { data: 'endDateString' },
-                    { data: 'policyType.name' }
+                    { data: 'carrier.name' },
+                    {
+                        data: 'isActive',
+                        render: function (data, type, policy) {
+                            return policy.isActive ? '<i class="fas fa-check active-policy"></i>' : '--';
+                        }
+                    }
                 ]
             });
 

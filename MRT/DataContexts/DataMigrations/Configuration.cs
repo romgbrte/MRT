@@ -34,12 +34,12 @@ namespace MRT.DataContexts.DataMigrations
     enable-migrations -ContextTypeName IdentityDb -MigrationsDirectory DataContexts\IdentityMigrations
 
     Second, create a migration:
-    add-migration -ConfigurationTypeName [context migration namespace].Configuration "InitialCreate"
+    add-migration -ConfigurationTypeName:"[context migration namespace].Configuration" -Name:"InitialCreate"
     example:
-    add-migration -ConfigurationTypeName MRT.DataContexts.IdentityMigrations.Configuration "InitialCreate"
+    add-migration -ConfigurationTypeName:"MRT.DataContexts.IdentityMigrations.Configuration" -Name:"InitialCreate"
 
     Third, update the database:
-    update-database -ConfigurationTypeName [context migration namespace].Configuration
+    update-database -ConfigurationTypeName:"[context migration namespace].Configuration"
     example
-    update-database -ConfigurationTypeName MRT.DataContexts.IdentityMigrations.Configuration
+    update-database -ConfigurationTypeName:"MRT.DataContexts.IdentityMigrations.Configuration"
 */

@@ -1,0 +1,45 @@
+﻿@model MRT.ViewModels.PolicyAssignmentViewModel
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container px-2">
+    <h3><i class="fas fa-edit mr-2"></i>@Model.Title</h3>
+    <hr />
+    <div class="card">
+        @using (Html.BeginForm("Save", "PolicyAssignments", FormMethod.Post, new { @id = "policyassignment-form" }))
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="font-weight-bold">Policy Number</label>
+                            <label class="form-control form-control-lg px-2">@Model.Policy.Number</label>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(p => p.CarrierId, new { @class = "font-weight-bold" })
+                            @Html.DropDownListFor(p => p.CarrierId, new SelectList(Model.Carriers, "Id", "Name"), new { @class = "form-control form-control-lg px-2" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    @Html.HiddenFor(m => m.PolicyId)
+                    @Html.HiddenFor(m => m.IsActive)
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.AntiForgeryToken()
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-sm-2 ml-sm-auto">
+                                <button type="submit" class="btn btn-info btn-block">
+                                    <i class="far fa-save mr-2"></i>Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

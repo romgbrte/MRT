@@ -35,7 +35,8 @@ namespace MRT.Dtos
         [Range(0.001, 100.000)]
         public float LossRate { get; set; }
 
-        public string StartDateString
+        /*
+         * public string StartDateString
         {
             get { return StartDate == null ? "--" : StartDate.ToShortDateString(); }
         }
@@ -44,5 +45,6 @@ namespace MRT.Dtos
         {
             get { return EndDate == null ? "--" : EndDate.ToShortDateString(); }
         }
+        */
     }
 }

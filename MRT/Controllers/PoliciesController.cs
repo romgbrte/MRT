@@ -49,6 +49,45 @@ namespace MRT.Controllers
             return View("PolicyForm", viewModel);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Save(Policy policy)
+        {
+            if(!ModelState.IsValid)
+            {
+                var newViewModel = new PolicyFormViewModel(policy)
+                {
+                    PolicyTypes = _context.PolicyTypes.ToList()
+                };
+
+                return View("PolicyForm", newViewModel);
+            }
+
+            if (policy.Id == 0)
+            {
+                _context.Policies.Add(policy);
+                _context.SaveChanges();
+
+                return RedirectToAction("Create", "PolicyAssignments", new { id = policy.Id });
+            }
+            else
+            {
+                var existingPolicy = _context.Policies.Single(p => p.Id == policy.Id);
+
+                existingPolicy.Number = policy.Number;
+                existingPolicy.StartDate = policy.StartDate;
+                existingPolicy.EndDate = policy.EndDate;
+                existingPolicy.PolicyTypeId = policy.PolicyTypeId;
+                existingPolicy.FundingRate = policy.FundingRate;
+                existingPolicy.CollateralRate = policy.CollateralRate;
+                existingPolicy.LossRate = policy.LossRate;
+
+                _context.SaveChanges();
+
+                return RedirectToAction("Index", "Policies");
+            }
+        }
+
         // GET: Policies
         [HttpGet]
         public ActionResult Index()

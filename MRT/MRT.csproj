@@ -228,6 +228,7 @@
     <Compile Include="Controllers\Api\CarriersController.cs" />
     <Compile Include="Controllers\Api\CodesController.cs" />
     <Compile Include="Controllers\Api\PoliciesController.cs" />
+    <Compile Include="Controllers\Api\PolicyAssignmentsController.cs" />
     <Compile Include="Controllers\Api\StatesCoveredController.cs" />
     <Compile Include="Controllers\Api\WCRatesController.cs" />
     <Compile Include="Controllers\CarriersController.cs" />
@@ -236,6 +237,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PoliciesController.cs" />
+    <Compile Include="Controllers\PolicyAssignmentsController.cs" />
     <Compile Include="Controllers\WCRatesController.cs" />
     <Compile Include="DataContexts\DataDb.cs" />
     <Compile Include="DataContexts\DataMigrations\201807170030308_InitialCreate.cs" />
@@ -342,6 +344,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CarrierFormViewModel.cs" />
+    <Compile Include="ViewModels\PolicyAssignmentViewModel.cs" />
     <Compile Include="ViewModels\PolicyFormViewModel.cs" />
     <Compile Include="ViewModels\Utilities\IsEndDateWithinTheNextTwoYears.cs" />
     <Compile Include="ViewModels\Utilities\IsStartDateWithinTheNextYear.cs" />
@@ -767,6 +770,7 @@
     <Content Include="Views\WCRates\Index.cshtml" />
     <Content Include="Views\Policies\PolicyForm.cshtml" />
     <Content Include="Views\Carriers\CarrierForm.cshtml" />
+    <Content Include="Views\PolicyAssignments\PolicyAssignmentForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

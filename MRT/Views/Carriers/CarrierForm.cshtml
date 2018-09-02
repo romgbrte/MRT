@@ -37,7 +37,7 @@
                                         {
                                             foreach (var state in Model.StatesCovered)
                                             {
-                                                <li class="list-group-item py-2" data-state-id=@state.Id>
+                                                <li class="list-group-item py-1" data-state-id=@state.Id>
                                                     @state.Name
                                                     <a href="#" class="covered float-right"><i class="fas fa-minus"></i></a>
                                                 </li>
@@ -58,7 +58,7 @@
                                         {
                                             foreach (var state in Model.StatesNotCovered)
                                             {
-                                                <li class="list-group-item py-2" data-state-id=@state.Id>
+                                                <li class="list-group-item py-1" data-state-id=@state.Id>
                                                     @state.Name
                                                     <a href="#" class="not-covered float-right">
                                                         <i class="fas fa-plus"></i>
@@ -123,7 +123,7 @@
                     method: ajaxMethod,
                     data: stateCoverageDto
                 })
-                    .done(function (e) {
+                    .done(function (result) {
                         if ($(destinationList + ' li').length == 0) {}
 
                         stateListItemLink.parent().appendTo(destinationList);

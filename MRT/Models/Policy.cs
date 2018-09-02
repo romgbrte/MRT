@@ -15,9 +15,11 @@ namespace MRT.Models
         [Display(Name = "Policy Number")]
         public string Number { get; set; }
 
+        [Required]
         [Display(Name = "Effective Date")]
         public DateTime StartDate { get; set; }
 
+        [Required]
         [Display(Name = "Effective Until")]
         public DateTime EndDate { get; set; }
 
