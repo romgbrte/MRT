@@ -10,7 +10,6 @@ using MRT.DataContexts;
 
 namespace MRT.Controllers
 {
-    [Authorize]
     public class PoliciesController : Controller
     {
         private DataDb _context;

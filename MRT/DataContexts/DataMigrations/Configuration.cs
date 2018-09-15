@@ -5,6 +5,7 @@ namespace MRT.DataContexts.DataMigrations
     using System.Data.Entity.Migrations;
     using System.IO;
     using System.Linq;
+    using MRT.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<MRT.DataContexts.DataDb>
     {
@@ -36,10 +37,10 @@ namespace MRT.DataContexts.DataMigrations
     Second, create a migration:
     add-migration -ConfigurationTypeName:"[context migration namespace].Configuration" -Name:"InitialCreate"
     example:
-    add-migration -ConfigurationTypeName:"MRT.DataContexts.IdentityMigrations.Configuration" -Name:"InitialCreate"
+    add-migration -ConfigurationTypeName:"MRT.DataContexts.DataMigrations.Configuration" -Name:"InitialCreate"
 
     Third, update the database:
     update-database -ConfigurationTypeName:"[context migration namespace].Configuration"
     example
-    update-database -ConfigurationTypeName:"MRT.DataContexts.IdentityMigrations.Configuration"
+    update-database -ConfigurationTypeName:"MRT.DataContexts.DataMigrations.Configuration"
 */

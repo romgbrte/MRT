@@ -11,7 +11,6 @@ using MRT.DataContexts;
 
 namespace MRT.Controllers
 {
-    [Authorize]
     public class CarriersController : Controller
     {
         private DataDb _context;

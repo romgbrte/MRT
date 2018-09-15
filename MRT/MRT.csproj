@@ -348,6 +348,7 @@
     <Compile Include="ViewModels\PolicyFormViewModel.cs" />
     <Compile Include="ViewModels\Utilities\IsEndDateWithinTheNextTwoYears.cs" />
     <Compile Include="ViewModels\Utilities\IsStartDateWithinTheNextYear.cs" />
+    <Compile Include="ViewModels\Utilities\ViewModelValidationStrings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Readme\Elmah.txt" />
@@ -713,6 +714,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SeedData\dbo.States.data.sql" />
     <EmbeddedResource Include="SeedData\dbo.Codes.data.sql" />
+    <Content Include="SeedData\dbo.WCRates.data.sql" />
     <Content Include="TODO.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

@@ -26,7 +26,7 @@ namespace MRT.Models
         public DateTime EffectiveDate { get; set; }
 
         [Required]
-        [Range(0.001, 100.000)]
+        [Range(0.01, 100.00)]
         public float Rate { get; set; }
 
         [Required]

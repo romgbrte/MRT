@@ -13,6 +13,7 @@ namespace MRT
                         "~/Scripts/bootstrap.js",
                         "~/Scripts/DataTables/jquery.dataTables.js",
                         "~/Scripts/DataTables/dataTables.bootstrap4.js",
+                        "~/Scripts/DataTables/dataTables.responsive.js",
                         "~/Scripts/site.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -27,6 +28,7 @@ namespace MRT
                       "~/Content/bootstrap-materia.css",
                       "~/Content/fontawesome/css/all.css",
                       "~/Content/DataTables/css/dataTables.bootstrap4.css",
+                      "~/Content/DataTables/css/responsive.bootstrap4.css",
                       "~/Content/site.css"));
         }
     }

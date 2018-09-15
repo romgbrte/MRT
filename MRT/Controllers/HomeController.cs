@@ -6,25 +6,12 @@ using System.Web.Mvc;
 
 namespace MRT.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "My Rate Tables";
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
+            ViewBag.Title = "Master Rate Tables";
             return View();
         }
     }

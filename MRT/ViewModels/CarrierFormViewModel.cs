@@ -16,7 +16,6 @@ namespace MRT.ViewModels
         [Display(Name = "Carrier Name")]
         public string Name { get; set; }
 
-        [Required]
         [Range(0.001, 100.000)]
         [Display(Name = "Carrier Base Rate")]
         public float BaseRate { get; set; }

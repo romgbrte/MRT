@@ -5,8 +5,7 @@
         <li class="nav-item dropdown">
             @Html.ActionLink("Welcome, " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link dropdown-toggle px-2", data_toggle = "dropdown" })
             <div class="dropdown-menu bg-dark">
-                <a href="#" class="dropdown-item"><i class="fas fa-user circle pr-1"></i> Profile</a>
-                <a href="#" class="dropdown-item"><i class="fas fa-cog circle pr-1"></i> Settings</a>
+                <a href="/Manage" class="dropdown-item"><i class="fas fa-cog circle pr-1"></i> Settings</a>
                 @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                 {
                     @Html.AntiForgeryToken()

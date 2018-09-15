@@ -26,12 +26,18 @@
                     dataSrc: ''
                 },
                 columns: [
-                    { data: 'wcrate.carrierName' },
-                    { data: 'wcrate.stateName' },
-                    { data: 'wcrate.codeNumber' },
+                    { data: 'carrierName' },
+                    { data: 'stateName' },
+                    { data: 'codeNumber' },
                     { data: 'rate' },
-                    { data: 'isActive' }
-                ]
+                    {
+                        data: 'isActive',
+                        render: function (data, type, rate) {
+                            return rate.isActive ? '<i class="fas fa-check active-rate"></i>' : '--';
+                        }
+                    }
+                ],
+                pageLength: 50
             });
 
             //$('div.dataTables_customToolbar').html('<a href="" class="btn btn-sm btn-info text-capitalize font-weight-bold"><i class="fas fa-plus pr-1" />New WC Rate</a>');

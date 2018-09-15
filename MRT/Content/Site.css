@@ -3,6 +3,14 @@
     padding-bottom: 3rem;
 }
 
+.table {
+    width: 100% !important;
+}
+
+:focus {
+    outline-color: #771e86 !important;
+}
+
 .navbar {
     padding-top: 0.34765625rem;
     padding-bottom: 0.34765625rem;
@@ -45,6 +53,16 @@
     color: #BD9A3D;
 }
 
+.paginate_button .page-link {
+    color: #9C27B0;
+}
+
+.paginate_button.active .page-link {
+    color: white !important;
+    background-color: #9C27B0 !important;
+    border-color: #771e86 !important;
+}
+
 .field-validation-error {
     color: #E31C51;
 }
@@ -67,7 +85,8 @@ select.form-control {
     padding: 0 0.5rem;
 }
 
-.active-policy {
+.active-policy,
+.active-rate {
     color: limegreen;
 }
 

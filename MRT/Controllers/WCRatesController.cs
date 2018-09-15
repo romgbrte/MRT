@@ -9,7 +9,6 @@ namespace MRT.Controllers
     public class WCRatesController : Controller
     {
         // GET: WCRates
-        [HttpGet]
         public ActionResult Index()
         {
             ViewBag.Title = "Worker's Compensation Rates";

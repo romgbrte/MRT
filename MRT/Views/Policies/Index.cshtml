@@ -18,6 +18,7 @@
         $(document).ready(function () {
             var table = $('#policyAssignmentsTable').DataTable({
                 dom: '<<"dataTables_customToolbar">lf<rt>ip>',
+                responsive: true,
                 ajax: {
                     url: '/api/policyassignments',
                     dataSrc: ''
@@ -36,7 +37,8 @@
                             return policy.isActive ? '<i class="fas fa-check active-policy"></i>' : '--';
                         }
                     }
-                ]
+                ],
+                pageLength: 25
             });
 
             $('div.dataTables_customToolbar')
