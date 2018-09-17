@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Linq;
 using System.Web.Http;
 using MRT.Models;
 using MRT.Dtos;
 using MRT.DataContexts;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace MRT.Controllers.Api
 {
+    [Authorize]
     public class CarriersController : ApiController
     {
         private DataDb _context;
@@ -24,13 +27,13 @@ namespace MRT.Controllers.Api
 
         // GET /api/carriers
         [HttpGet]
-        public IHttpActionResult GetCarriers()
+        public async Task<IHttpActionResult> GetCarriers()
         {
-            var carrierDtos = _context.Carriers
-                .Select(Mapper.Map<Carrier, CarrierDto>)
-                .ToList();
-            var stateCoverages = _context.StateCoverages.ToList();
-            var states = _context.States.ToList();
+            var carrierDtos = await _context.Carriers
+                .ProjectTo<CarrierDto>()
+                .ToListAsync();
+            var stateCoverages = await _context.StateCoverages.ToListAsync();
+            var states = await _context.States.ToListAsync();
 
             foreach (var carrierDto in carrierDtos)
             {

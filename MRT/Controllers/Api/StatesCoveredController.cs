@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Linq;
 using System.Web.Http;
 using MRT.Models;
 using MRT.Dtos;
 using MRT.DataContexts;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace MRT.Controllers.Api
 {
+    [Authorize]
     public class StatesCoveredController : ApiController
     {
         private DataDb _context;
@@ -23,56 +26,56 @@ namespace MRT.Controllers.Api
         }
 
         // GET /api/statescovered/# (get a list of the states covered by a carrier)
-        public IHttpActionResult GetStatesCovered(int id) // CarrierId
+        public async Task<IHttpActionResult> GetStatesCovered(int id) // CarrierId
         {
-            var statesCovered = _context.StateCoverages
+            var statesCovered = await _context.StateCoverages
                 .Include(s => s.State)
                 .Where(c => c.CarrierId == id)
                 .Select(s => s.State)
                 .OrderBy(s => s.Id)
-                .Select(Mapper.Map<State, StateDto>)
-                .ToList();
+                .ProjectTo<StateDto>()
+                .ToListAsync();
 
             return Ok(statesCovered);
         }
 
         // POST /api/statescovered (create a new StateCoverage record)
         [HttpPost]
-        public IHttpActionResult CreateStateCoverage(StateCoverageDto stateCoverageDto)
+        public async Task<IHttpActionResult> CreateStateCoverage(StateCoverageDto stateCoverageDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Model state is not valid");
 
-            var existingStateCoverage = _context.StateCoverages
+            var existingStateCoverage = await _context.StateCoverages
                 .Where(c => c.CarrierId == stateCoverageDto.CarrierId)
-                .SingleOrDefault(s => s.StateId == stateCoverageDto.StateId);
+                .SingleOrDefaultAsync(s => s.StateId == stateCoverageDto.StateId);
 
             if (existingStateCoverage != null)
                 return BadRequest("Record already exists");
 
             var newStateCoverage = Mapper.Map<StateCoverageDto, StateCoverage>(stateCoverageDto);
             _context.StateCoverages.Add(newStateCoverage);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok();
         }
 
         // DELETE /api/statescovered/# (delete an existing StateCoverage record)
         [HttpDelete]
-        public IHttpActionResult DeleteStateCoverage(StateCoverageDto stateCoverageDto)
+        public async Task<IHttpActionResult> DeleteStateCoverage(StateCoverageDto stateCoverageDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Model state is not valid");
 
-            var stateCoverage = _context.StateCoverages
+            var stateCoverage = await _context.StateCoverages
                 .Where(c => c.CarrierId == stateCoverageDto.CarrierId)
-                .SingleOrDefault(s => s.StateId == stateCoverageDto.StateId);
+                .SingleOrDefaultAsync(s => s.StateId == stateCoverageDto.StateId);
 
             if (stateCoverage == null)
                 return NotFound();
 
             _context.StateCoverages.Remove(stateCoverage);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return Ok();
         }

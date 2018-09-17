@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Data.Entity;
-using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
-using MRT.Models;
 using MRT.Dtos;
 using MRT.DataContexts;
-using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace MRT.Controllers.Api
 {
+    [Authorize]
     public class PoliciesController : ApiController
     {
         private DataDb _context;
@@ -25,13 +25,14 @@ namespace MRT.Controllers.Api
 
         // GET /api/policies
         [HttpGet]
-        public IHttpActionResult GetPolicies()
+        public async Task<IHttpActionResult> GetPolicies()
         {
-            var policies = _context.Policies
+            var policies = await _context.Policies
                 .Include(p => p.PolicyType)
-                .ToList();
+                .ProjectTo<PolicyDto>()
+                .ToListAsync();
 
-            return Ok(policies.Select(Mapper.Map<Policy, PolicyDto>));
+            return Ok(policies);
         }
     }
 }

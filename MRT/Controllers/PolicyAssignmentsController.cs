@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -23,15 +25,15 @@ namespace MRT.Controllers
         }
 
         [HttpGet]
-        public ActionResult Create(int id)
+        public async Task<ActionResult> Create(int id)
         {
-            var policy = _context.Policies.Single(p => p.Id == id);
+            var policy = await _context.Policies.SingleAsync(p => p.Id == id);
 
             if (!ModelState.IsValid)
             {
                 var newViewModel = new PolicyFormViewModel(policy)
                 {
-                    PolicyTypes = _context.PolicyTypes.ToList()
+                    PolicyTypes = await _context.PolicyTypes.ToListAsync()
                 };
 
                 return RedirectToAction("Edit", "Policies", newViewModel);
@@ -41,33 +43,33 @@ namespace MRT.Controllers
             {
                 PolicyId = policy.Id,
                 Policy = policy,
-                Carriers = _context.Carriers.ToList()
+                Carriers = await _context.Carriers.ToListAsync()
             };
 
             return View("PolicyAssignmentForm", newPolicyAssignment);
         }
 
         [HttpPost]
-        public ActionResult Save(PolicyAssignment policyAssignment)
+        public async Task<ActionResult> Save(PolicyAssignment policyAssignment)
         {
             if(!ModelState.IsValid)
             {
                 var newViewModel = new PolicyAssignmentViewModel(policyAssignment)
                 {
-                    Carriers = _context.Carriers.ToList()
+                    Carriers = await _context.Carriers.ToListAsync()
                 };
 
                 return View("PolicyAssignmentForm", newViewModel);
             }
 
-            var existingPolicyAssignment = _context.PolicyAssignments
+            var existingPolicyAssignment = await _context.PolicyAssignments
                 .Where(c => c.CarrierId == policyAssignment.CarrierId)
-                .SingleOrDefault(a => a.IsActive == true);
+                .SingleOrDefaultAsync(a => a.IsActive == true);
             if(existingPolicyAssignment != null)
                 existingPolicyAssignment.IsActive = false;
 
             _context.PolicyAssignments.Add(policyAssignment);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return RedirectToAction("Index", "Policies");
         }

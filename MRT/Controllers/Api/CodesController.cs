@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Linq;
 using System.Web.Http;
-using MRT.Models;
 using MRT.Dtos;
 using MRT.DataContexts;
-using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace MRT.Controllers.Api
 {
+    [Authorize]
     public class CodesController : ApiController
     {
         private DataDb _context;
@@ -23,9 +25,11 @@ namespace MRT.Controllers.Api
 
         // GET /api/codes
         [HttpGet]
-        public IHttpActionResult GetCodes()
+        public async Task<IHttpActionResult> GetCodes()
         {
-            var codeDtos = _context.Codes.ToList().Select(Mapper.Map<Code, CodeDto>);
+            var codeDtos = await _context.Codes
+                .ProjectTo<CodeDto>()
+                .ToListAsync();
 
             return Ok(codeDtos);
         }

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Data.Entity;
-using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using MRT.Models;
 using MRT.ViewModels;
@@ -24,28 +23,28 @@ namespace MRT.Controllers
         }
 
         [HttpGet]
-        public ActionResult New()
+        public async Task<ActionResult> New()
         {
             var viewModel = new CarrierFormViewModel()
             {
-                StatesNotCovered = _context.States.ToList()
+                StatesNotCovered = await _context.States.ToListAsync()
             };
 
             return View("CarrierForm", viewModel);
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            var carrier = _context.Carriers.SingleOrDefault(p => p.Id == id);
+            var carrier = await _context.Carriers.SingleOrDefaultAsync(p => p.Id == id);
             if (carrier == null)
-                return HttpNotFound("carrier was null");
+                return HttpNotFound("Carrier does not exist");
 
-            var states = _context.States.ToList();
-            var stateCoverages = _context.StateCoverages
+            var states = await _context.States.ToListAsync();
+            var stateCoverages = await _context.StateCoverages
                 .Where(c => c.CarrierId == id)
                 .Select(s => s.StateId)
-                .ToList();
+                .ToListAsync();
 
             var viewModel = new CarrierFormViewModel(carrier)
             {
@@ -58,15 +57,15 @@ namespace MRT.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save(Carrier carrier)
+        public async Task<ActionResult> Save(Carrier carrier)
         {
             if(!ModelState.IsValid)
             {
-                var states = _context.States.ToList();
-                var stateCoverages = _context.StateCoverages
+                var states = await _context.States.ToListAsync();
+                var stateCoverages = await _context.StateCoverages
                     .Where(c => c.CarrierId == carrier.Id)
                     .Select(s => s.StateId)
-                    .ToList();
+                    .ToListAsync();
 
                 var carrierViewModel = new CarrierFormViewModel(carrier)
                 {
@@ -81,13 +80,13 @@ namespace MRT.Controllers
                 _context.Carriers.Add(carrier);
             else
             {
-                var existingCarrier = _context.Carriers.Single(c => c.Id == carrier.Id);
+                var existingCarrier = await _context.Carriers.SingleAsync(c => c.Id == carrier.Id);
 
                 existingCarrier.Name = carrier.Name;
                 existingCarrier.BaseRate = carrier.BaseRate;
             }
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return RedirectToAction("Index", "Carriers");
         }

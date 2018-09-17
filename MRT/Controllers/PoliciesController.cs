@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -23,26 +25,26 @@ namespace MRT.Controllers
         }
 
         [HttpGet]
-        public ActionResult New()
+        public async Task<ActionResult> New()
         {
             var viewModel = new PolicyFormViewModel()
             {
-                PolicyTypes = _context.PolicyTypes.ToList()
+                PolicyTypes = await _context.PolicyTypes.ToListAsync()
             };
 
             return View("PolicyForm", viewModel);
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            var policy = _context.Policies.FirstOrDefault(p => p.Id == id);
+            var policy = await _context.Policies.FirstOrDefaultAsync(p => p.Id == id);
             if (policy == null)
                 return HttpNotFound();
 
             var viewModel = new PolicyFormViewModel(policy)
             {
-                PolicyTypes = _context.PolicyTypes.ToList()
+                PolicyTypes = await _context.PolicyTypes.ToListAsync()
             };
 
             return View("PolicyForm", viewModel);
@@ -50,13 +52,13 @@ namespace MRT.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Save(Policy policy)
+        public async Task<ActionResult> Save(Policy policy)
         {
             if(!ModelState.IsValid)
             {
                 var newViewModel = new PolicyFormViewModel(policy)
                 {
-                    PolicyTypes = _context.PolicyTypes.ToList()
+                    PolicyTypes = await _context.PolicyTypes.ToListAsync()
                 };
 
                 return View("PolicyForm", newViewModel);
@@ -65,13 +67,13 @@ namespace MRT.Controllers
             if (policy.Id == 0)
             {
                 _context.Policies.Add(policy);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction("Create", "PolicyAssignments", new { id = policy.Id });
             }
             else
             {
-                var existingPolicy = _context.Policies.Single(p => p.Id == policy.Id);
+                var existingPolicy = await _context.Policies.SingleAsync(p => p.Id == policy.Id);
 
                 existingPolicy.Number = policy.Number;
                 existingPolicy.StartDate = policy.StartDate;
@@ -81,7 +83,7 @@ namespace MRT.Controllers
                 existingPolicy.CollateralRate = policy.CollateralRate;
                 existingPolicy.LossRate = policy.LossRate;
 
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
 
                 return RedirectToAction("Index", "Policies");
             }

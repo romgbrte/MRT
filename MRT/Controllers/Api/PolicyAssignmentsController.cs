@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
-using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -8,9 +8,11 @@ using MRT.Models;
 using MRT.Dtos;
 using MRT.DataContexts;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace MRT.Controllers.Api
 {
+    [Authorize]
     public class PolicyAssignmentsController : ApiController
     {
         private DataDb _context;
@@ -25,29 +27,30 @@ namespace MRT.Controllers.Api
 
         // GET /api/policyassignments
         [HttpGet]
-        public IHttpActionResult GetPolicyAssignments()
+        public async Task<IHttpActionResult> GetPolicyAssignments()
         {
-            var policyAssignments = _context.PolicyAssignments
+            var policyAssignments = await _context.PolicyAssignments
                 .Include(c => c.Carrier)
                 .Include(p => p.Policy)
-                .ToList();
+                .ProjectTo<PolicyAssignmentDto>()
+                .ToListAsync();
 
-            return Ok(policyAssignments.Select(Mapper.Map<PolicyAssignment, PolicyAssignmentDto>));
+            return Ok(policyAssignments);
         }
 
         // GET /api/policyassignments/#
         [HttpGet]
-        public IHttpActionResult GetPolicyAssignment(int id)
+        public async Task<IHttpActionResult> GetPolicyAssignment(int id)
         {
-            var policyAssignment = _context.PolicyAssignments
+            var policyAssignmentDto = await _context.PolicyAssignments
                 .Include(c => c.Carrier)
-                .Single(p => p.PolicyId == id);
+                .ProjectTo<PolicyAssignmentDto>()
+                .SingleAsync(p => p.PolicyId == id);
 
-            return Ok(Mapper.Map<PolicyAssignment, PolicyAssignmentDto>(policyAssignment));
+            return Ok(policyAssignmentDto);
         }
 
         // POST /api/policyassignments
-        [Authorize]
         [HttpPost]
         public IHttpActionResult CreatePolicyAssignment(PolicyAssignmentDto policyAssignmentDto)
         {

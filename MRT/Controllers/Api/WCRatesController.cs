@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Linq;
 using System.Web.Http;
-using MRT.Models;
 using MRT.Dtos;
 using MRT.DataContexts;
-using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace MRT.Controllers.Api
 {
+    [Authorize]
     public class WCRatesController : ApiController
     {
         private DataDb _context;
@@ -24,14 +25,14 @@ namespace MRT.Controllers.Api
 
         // GET /api/wcrates
         [HttpGet]
-        public IHttpActionResult GetWCRates()
+        public async Task<IHttpActionResult> GetWCRates()
         {
-            var wcratesDtos = _context.WCRates
+            var wcratesDtos = await _context.WCRates
                 .Include(ca => ca.Carrier)
                 .Include(s => s.State)
                 .Include(co => co.Code)
-                .ToList()
-                .Select(Mapper.Map<WCRate, WCRateDto>);
+                .ProjectTo<WCRateDto>()
+                .ToListAsync();
 
             return Ok(wcratesDtos);
         }
