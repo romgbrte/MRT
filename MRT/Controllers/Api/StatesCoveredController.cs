@@ -12,7 +12,6 @@ using AutoMapper.QueryableExtensions;
 
 namespace MRT.Controllers.Api
 {
-    [Authorize]
     public class StatesCoveredController : ApiController
     {
         private DataDb _context;

@@ -10,7 +10,6 @@ using AutoMapper.QueryableExtensions;
 
 namespace MRT.Controllers.Api
 {
-    [Authorize]
     public class PoliciesController : ApiController
     {
         private DataDb _context;

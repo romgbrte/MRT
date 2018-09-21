@@ -10,7 +10,6 @@ using AutoMapper.QueryableExtensions;
 
 namespace MRT.Controllers.Api
 {
-    [Authorize]
     public class WCRatesController : ApiController
     {
         private DataDb _context;
