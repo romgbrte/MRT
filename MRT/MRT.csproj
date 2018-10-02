@@ -227,6 +227,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Authentication_Authorization\ApplicationOAuthProvider.cs" />
+    <Compile Include="Authentication_Authorization\ChallengeResult.cs" />
+    <Compile Include="Authentication_Authorization\RoleName.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\CarriersController.cs" />
     <Compile Include="Controllers\Api\CodesController.cs" />
@@ -531,6 +534,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\App\Carriers\CarrierForm.js" />
+    <Content Include="Scripts\App\Carriers\Index.js" />
+    <Content Include="Scripts\App\Codes\Index.js" />
+    <Content Include="Scripts\App\Policies\Index.js" />
+    <Content Include="Scripts\App\Policies\PolicyForm.js" />
+    <Content Include="Scripts\App\WCRates\Index.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -660,7 +669,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
-    <Content Include="Scripts\Site.js" />
+    <Content Include="Scripts\App\Site.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -769,7 +778,7 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Error\Internal.cshtml" />
-    <Content Include="Views\Error\AccessDenied.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
     <Content Include="Views\Error\BadRequest.cshtml" />
     <Content Include="Views\Carriers\Index.cshtml" />
     <Content Include="Views\Policies\Index.cshtml" />
@@ -777,6 +786,7 @@
     <Content Include="Views\Policies\PolicyForm.cshtml" />
     <Content Include="Views\Carriers\CarrierForm.cshtml" />
     <Content Include="Views\PolicyAssignments\PolicyAssignmentForm.cshtml" />
+    <Content Include="Views\Error\Unauthorized.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

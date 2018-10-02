@@ -24,7 +24,6 @@ namespace MRT.Controllers.Api
             _context.Dispose();
         }
 
-        // GET /api/carriers
         [HttpGet]
         public async Task<IHttpActionResult> GetCarriers()
         {

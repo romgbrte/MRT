@@ -24,7 +24,6 @@ namespace MRT.Controllers.Api
             _context.Dispose();
         }
 
-        // GET /api/policyassignments
         [HttpGet]
         public async Task<IHttpActionResult> GetPolicyAssignments()
         {
@@ -37,9 +36,8 @@ namespace MRT.Controllers.Api
             return Ok(policyAssignments);
         }
 
-        // GET /api/policyassignments/#
         [HttpGet]
-        public async Task<IHttpActionResult> GetPolicyAssignment(int id)
+        public async Task<IHttpActionResult> GetPolicyAssignments(int id)
         {
             var policyAssignmentDto = await _context.PolicyAssignments
                 .Include(c => c.Carrier)
@@ -48,8 +46,7 @@ namespace MRT.Controllers.Api
 
             return Ok(policyAssignmentDto);
         }
-
-        // POST /api/policyassignments
+        
         [HttpPost]
         public IHttpActionResult CreatePolicyAssignment(PolicyAssignmentDto policyAssignmentDto)
         {

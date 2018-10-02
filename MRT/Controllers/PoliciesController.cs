@@ -32,6 +32,7 @@ namespace MRT.Controllers
                 PolicyTypes = await _context.PolicyTypes.ToListAsync()
             };
 
+            ViewBag.Title = "New Policy";
             return View("PolicyForm", viewModel);
         }
 
@@ -47,6 +48,7 @@ namespace MRT.Controllers
                 PolicyTypes = await _context.PolicyTypes.ToListAsync()
             };
 
+            ViewBag.Title = "Edit Policy";
             return View("PolicyForm", viewModel);
         }
 

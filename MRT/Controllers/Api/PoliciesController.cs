@@ -22,7 +22,6 @@ namespace MRT.Controllers.Api
             _context.Dispose();
         }
 
-        // GET /api/policies
         [HttpGet]
         public async Task<IHttpActionResult> GetPolicies()
         {

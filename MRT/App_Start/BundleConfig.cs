@@ -10,11 +10,11 @@ namespace MRT
         {
             bundles.Add(new ScriptBundle("~/bundles/lib").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/bootstrap.js",
-                        "~/Scripts/DataTables/jquery.dataTables.js",
-                        "~/Scripts/DataTables/dataTables.bootstrap4.js",
-                        "~/Scripts/DataTables/dataTables.responsive.js",
-                        "~/Scripts/site.js"));
+                        "~/Scripts/bootstrap.bundle.min.js",
+                        "~/Scripts/DataTables/jquery.dataTables.min.js",
+                        "~/Scripts/DataTables/dataTables.bootstrap4.min.js",
+                        "~/Scripts/DataTables/dataTables.responsive.min.js",
+                        "~/Scripts/App/site.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -25,10 +25,10 @@ namespace MRT
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap-materia.css",
+                      "~/Content/bootstrap-materia.min.css",
                       "~/Content/fontawesome/css/all.css",
-                      "~/Content/DataTables/css/dataTables.bootstrap4.css",
-                      "~/Content/DataTables/css/responsive.bootstrap4.css",
+                      "~/Content/DataTables/css/dataTables.bootstrap4.min.css",
+                      "~/Content/DataTables/css/responsive.bootstrap4.min.css",
                       "~/Content/site.css"));
         }
     }

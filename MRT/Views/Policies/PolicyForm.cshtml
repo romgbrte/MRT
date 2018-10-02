@@ -6,53 +6,106 @@
 <div class="container px-2">
     <h3><i class="fas fa-edit mr-2"></i>@Model.Title</h3>
     <hr />
-    <div class="card">
-        @using (Html.BeginForm("Save", "Policies", FormMethod.Post, new { @id = "policy-form" }))
+    <div class="card card-form-background">
+        @using (Html.BeginForm("Save", "Policies", FormMethod.Post, new { @id = "policy-form", @data_policy_id = Model.Id }))
         {
         <div class="row">
             <div class="col-md-6">
                 <div class="card-body">
-                    @if(Model.Id != 0)
+                    @if (Model.Id != 0)
                     {
-                        <div class="form-group">
-                            <label class="font-weight-bold">Assigned Carrier</label>
-                            <label id="assigned-carrier-text" class="form-control px-2 pb-1 pt-2 form-control-lg"></label>
+                        <div class="row form-group">
+                            <div class="col-10">
+                                <label class="font-weight-bold">Assigned Carrier</label>
+                            </div>
+                            <div class="col-2 text-right">
+                                <i id="policy-popover-carrier" data-toggle="popover" class="fas fa-info-circle info-icon"></i>
+                            </div>
+                            <div class="col">
+                                <label id="assigned-carrier-text" class="form-control px-2 pb-1 pt-2 form-control-lg"></label>
+                            </div>
                         </div>
                     }
-                    <div class="form-group">
-                        @Html.LabelFor(p => p.Number, new { @class = "font-weight-bold" })
-                        @Html.TextBoxFor(p => p.Number, new { @class = "form-control px-2" })
-                        @Html.ValidationMessageFor(p => p.Number)
+                    <div class="row form-group">
+                        <div class="col-10">
+                            @Html.LabelFor(p => p.Number, new { @class = "font-weight-bold" })
+                        </div>
+                        <div class="col-2 text-right">
+                            <i id="policy-popover-number" data-toggle="popover" class="fas fa-info-circle info-icon"></i>
+                        </div>
+                        <div class="col">
+                            @Html.TextBoxFor(p => p.Number, new { @class = "form-control px-2" })
+                            @Html.ValidationMessageFor(p => p.Number)
+                        </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(p => p.StartDate, new { @class = "font-weight-bold" })
-                        @Html.TextBoxFor(p => p.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control px-2" })
-                        @Html.ValidationMessageFor(p => p.StartDate)
+                    <div class="row form-group">
+                        <div class="col-10">
+                            @Html.LabelFor(p => p.StartDate, new { @class = "font-weight-bold" })
+                        </div>
+                        <div class="col-2 text-right">
+                            <i id="policy-popover-startdate" data-toggle="popover" class="fas fa-info-circle info-icon"></i>
+                        </div>
+                        <div class="col">
+                            @Html.TextBoxFor(p => p.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control px-2" })
+                            @Html.ValidationMessageFor(p => p.StartDate)
+                        </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(p => p.EndDate, new { @class = "font-weight-bold" })
-                        @Html.TextBoxFor(p => p.EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control px-2" })
-                        @Html.ValidationMessageFor(p => p.EndDate)
+                    <div class="row form-group">
+                        <div class="col-10">
+                            @Html.LabelFor(p => p.EndDate, new { @class = "font-weight-bold" })
+                        </div>
+                        <div class="col-2 text-right">
+                            <i id="policy-popover-enddate" data-toggle="popover" class="fas fa-info-circle info-icon"></i>
+                        </div>
+                        <div class="col">
+                            @Html.TextBoxFor(p => p.EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control px-2" })
+                            @Html.ValidationMessageFor(p => p.EndDate)
+                        </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(p => p.PolicyTypeId, new { @class = "font-weight-bold" })
-                        @Html.DropDownListFor(p => p.PolicyTypeId, new SelectList(Model.PolicyTypes, "Id", "Name"), new { @class = "form-control px-2" })
-                        @Html.ValidationMessageFor(p => p.PolicyTypeId)
+                    <div class="row form-group">
+                        <div class="col-12">
+                            @Html.LabelFor(p => p.PolicyTypeId, new { @class = "font-weight-bold" })
+                        </div>
+                        <div class="col">
+                            @Html.DropDownListFor(p => p.PolicyTypeId, new SelectList(Model.PolicyTypes, "Id", "Name"), new { @class = "form-control px-2" })
+                            @Html.ValidationMessageFor(p => p.PolicyTypeId)
+                        </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(p => p.FundingRate, new { @class = "font-weight-bold" })
-                        @Html.TextBoxFor(p => p.FundingRate, new { @class = "form-control px-2", aria_label = "Funding rate to the nearest thousandth" })
-                        @Html.ValidationMessageFor(p => p.FundingRate)
+                    <div class="row form-group">
+                        <div class="col-10">
+                            @Html.LabelFor(p => p.FundingRate, new { @class = "font-weight-bold" })
+                        </div>
+                        <div class="col-2 text-right">
+                            <i id="policy-popover-rate-funding" data-toggle="popover" class="fas fa-info-circle info-icon"></i>
+                        </div>
+                        <div class="col">
+                            @Html.TextBoxFor(p => p.FundingRate, new { @class = "form-control px-2", aria_label = "Funding rate to the nearest thousandth" })
+                            @Html.ValidationMessageFor(p => p.FundingRate)
+                        </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(p => p.CollateralRate, new { @class = "font-weight-bold" })
-                        @Html.TextBoxFor(p => p.CollateralRate, new { @class = "form-control px-2", aria_label = "Colleteral rate to the nearest thousandth" })
-                        @Html.ValidationMessageFor(p => p.CollateralRate)
+                    <div class="row form-group">
+                        <div class="col-10">
+                            @Html.LabelFor(p => p.CollateralRate, new { @class = "font-weight-bold" })
+                        </div>
+                        <div class="col-2 text-right">
+                            <i id="policy-popover-rate-collateral" data-toggle="popover" class="fas fa-info-circle info-icon"></i>
+                        </div>
+                        <div class="col">
+                            @Html.TextBoxFor(p => p.CollateralRate, new { @class = "form-control px-2", aria_label = "Colleteral rate to the nearest thousandth" })
+                            @Html.ValidationMessageFor(p => p.CollateralRate)
+                        </div>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(p => p.LossRate, new { @class = "font-weight-bold" })
-                        @Html.TextBoxFor(p => p.LossRate, new { @class = "form-control px-2", aria_label = "Loss rate to the nearest thousandth" })
-                        @Html.ValidationMessageFor(p => p.LossRate)
+                    <div class="row form-group">
+                        <div class="col-10">
+                            @Html.LabelFor(p => p.LossRate, new { @class = "font-weight-bold" })
+                        </div>
+                        <div class="col-2 text-right">
+                            <i id="policy-popover-rate-loss" data-toggle="popover" class="fas fa-info-circle info-icon"></i>
+                        </div>
+                        <div class="col">
+                            @Html.TextBoxFor(p => p.LossRate, new { @class = "form-control px-2", aria_label = "Loss rate to the nearest thousandth" })
+                            @Html.ValidationMessageFor(p => p.LossRate)
+                        </div>
                     </div>
                 </div>
             </div>
@@ -77,21 +130,5 @@
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
-    <script>
-        $(document).ready(function () {
-            var existingPolicyId = '@Model.Id';
-            if (existingPolicyId != 0) {
-                $.ajax({
-                    url: '/api/policyassignments/' + existingPolicyId,
-                    method: 'get'
-                })
-                    .done(function (policyAssignmentDto) {
-                        $('#assigned-carrier-text').html(policyAssignmentDto != null ? policyAssignmentDto.carrier.name : '');
-                    })
-                    .fail(function (e) {
-                        console.log('Policy assignment could not be retrieved, please contact the administrator');
-                    });
-            }
-        });
-    </script>
+    @Scripts.Render("~/Scripts/App/Policies/PolicyForm.js")
 }

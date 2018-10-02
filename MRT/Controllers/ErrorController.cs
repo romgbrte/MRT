@@ -23,7 +23,14 @@ namespace MRT.Controllers
             return View();
         }
 
-        public ActionResult AccessDenied()
+        public ActionResult Unauthorized()
+        {
+            Response.TrySkipIisCustomErrors = true;
+            Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+            return View();
+        }
+
+        public ActionResult Forbidden()
         {
             Response.TrySkipIisCustomErrors = true;
             Response.StatusCode = (int)HttpStatusCode.Forbidden;

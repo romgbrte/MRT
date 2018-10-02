@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using MRT.DataContexts;
 using MRT.Models;
 
 namespace MRT.Controllers
@@ -155,6 +157,18 @@ namespace MRT.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    /* * * Seeding a registering user with the AdminFullAccess role
+                    string newRoleName = "AdminFullAccess";
+                    // a RoleStore is required to store role data
+                    var roleStore = new RoleStore<IdentityRole>(new IdentityDb());
+                    // a RoleManager is required to access the RoleStore to execute Role transactions
+                    var roleManager = new RoleManager<IdentityRole>(roleStore);
+                    // a Role can now be created
+                    await roleManager.CreateAsync(new IdentityRole(newRoleName));
+                    // assign a user to the role (in this case, the user we have just registered)
+                    await UserManager.AddToRoleAsync(user.Id, newRoleName);
+                    */
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

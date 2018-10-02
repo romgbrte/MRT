@@ -1,26 +1,5 @@
-﻿- NEXT: finish updating tags and css on stock MVC pages
-	Done:
-		_Layout
-		_LoginPartial
-		Login
-		Register
-		Home/Index
-		Manage/Index
-	Partially Done:
-		Manage/Index
-
-- Install Toastr via nuget, and reference in BundleConfig.cs
+﻿- Install Toastr via nuget, and reference in BundleConfig.cs
 - Install Bootbox via ??, and reference in BundleConfig.cs
-
-- I would like account dropdown menu items lined up
-
-- change coloring of pagination and custom checkboxes
-
-- Have a loading bar or something for when api requests are being loaded into DataTables
-
-- DataTables aren't responsive to window resizing
-
-- Alter 'Add State' in Carrier edit being a <li>?
 
 - Implement color set:
 	9C27B0 purple

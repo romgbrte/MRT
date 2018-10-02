@@ -30,6 +30,7 @@ namespace MRT.Controllers
                 StatesNotCovered = await _context.States.ToListAsync()
             };
 
+            ViewBag.Title = "New Carrier";
             return View("CarrierForm", viewModel);
         }
 
@@ -52,6 +53,7 @@ namespace MRT.Controllers
                 StatesNotCovered = states.Where(s => !stateCoverages.Contains(s.Id)).ToList()
             };
 
+            ViewBag.Title = "Edit Carrier";
             return View("CarrierForm", viewModel);
         }
 

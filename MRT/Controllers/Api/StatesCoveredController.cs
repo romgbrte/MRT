@@ -24,7 +24,8 @@ namespace MRT.Controllers.Api
             _context.Dispose();
         }
 
-        // GET /api/statescovered/# (get a list of the states covered by a carrier)
+        // get a list of the states covered by a carrier
+        [HttpGet]
         public async Task<IHttpActionResult> GetStatesCovered(int id) // CarrierId
         {
             var statesCovered = await _context.StateCoverages
@@ -38,7 +39,7 @@ namespace MRT.Controllers.Api
             return Ok(statesCovered);
         }
 
-        // POST /api/statescovered (create a new StateCoverage record)
+        // create a new StateCoverage record
         [HttpPost]
         public async Task<IHttpActionResult> CreateStateCoverage(StateCoverageDto stateCoverageDto)
         {
@@ -59,7 +60,7 @@ namespace MRT.Controllers.Api
             return Ok();
         }
 
-        // DELETE /api/statescovered/# (delete an existing StateCoverage record)
+        // delete an existing StateCoverage record
         [HttpDelete]
         public async Task<IHttpActionResult> DeleteStateCoverage(StateCoverageDto stateCoverageDto)
         {

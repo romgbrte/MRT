@@ -17,6 +17,9 @@ namespace MRT
             serializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             serializerSettings.Formatting = Formatting.Indented;
 
+            //config.SuppressDefaultHostAuthentication();
+            //config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+
             // Web API routes
             config.MapHttpAttributeRoutes();
 

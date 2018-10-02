@@ -2,6 +2,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h4 class="mobile-header text-center">Code List</h4>
 <table id="codesTable" class="table table-sm table-responsive-sm table-striped table-hover">
     <thead class="thead-dark">
         <tr>
@@ -13,28 +14,5 @@
 </table>
 
 @section scripts{
-    <script>
-        $(document).ready(function () {
-            $('#codesTable').DataTable({
-                //dom: '<<"dataTables_customToolbar">lf<rt>ip>',
-                dom: '<lf<rt>ip>',
-                ajax: {
-                    url: '/api/codes',
-                    dataSrc: ''
-                },
-                columns: [
-                    { data: 'number' },
-                    { data: 'jobDescription' }
-                ],
-                pageLength: 50
-            });
-
-            //$('div.dataTables_customToolbar').html('<a href="" class="btn btn-sm btn-info text-capitalize font-weight-bold"><i class="fas fa-plus pr-1" />New Code</a>');
-            //$('.dataTables_customToolbar').addClass('col-sm-auto text-center mb-2 dt_topbar_element');
-            $('.dataTables_length').addClass('col-sm-auto dt_topbar_element');
-            $('.dataTables_filter').addClass('col-sm-auto ml-md-auto dt_topbar_element');
-            $('.dt_topbar_element')
-                .wrapAll('<div class="dt_topbar container"><div class="row"></div></div>');
-        });
-    </script>    
+    @Scripts.Render("~/Scripts/App/Codes/Index.js")
 }

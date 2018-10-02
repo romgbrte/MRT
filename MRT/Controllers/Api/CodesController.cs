@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web.Http;
 using MRT.Dtos;
 using MRT.DataContexts;
+using MRT.Authentication_Authorization;
 using AutoMapper.QueryableExtensions;
 
 namespace MRT.Controllers.Api
@@ -21,8 +22,7 @@ namespace MRT.Controllers.Api
         {
             _context.Dispose();
         }
-
-        // GET /api/codes
+        
         [HttpGet]
         public async Task<IHttpActionResult> GetCodes()
         {
