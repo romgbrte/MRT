@@ -729,7 +729,6 @@
     <EmbeddedResource Include="SeedData\dbo.Codes.data.sql" />
     <EmbeddedResource Include="SeedData\dbo.WCRates.data.sql" />
     <Content Include="SeedData\dbo.Carriers.data.sql" />
-    <Content Include="TODO.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
