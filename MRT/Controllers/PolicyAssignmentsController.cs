@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using MRT.Models;
 using MRT.ViewModels;
 using MRT.DataContexts;
+using MRT.Extensions;
 
 namespace MRT.Controllers
 {
@@ -65,20 +66,13 @@ namespace MRT.Controllers
             var existingPolicyAssignment = await _context.PolicyAssignments
                 .Where(c => c.CarrierId == policyAssignment.CarrierId)
                 .SingleOrDefaultAsync(a => a.IsActive == true);
-            if(existingPolicyAssignment != null)
+            if(existingPolicyAssignment.IsNotNull())
                 existingPolicyAssignment.IsActive = false;
 
             _context.PolicyAssignments.Add(policyAssignment);
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Index", "Policies");
-        }
-
-        // GET: PolicyAssignments
-        [HttpGet]
-        public ActionResult Index()
-        {
-            return View();
         }
     }
 }

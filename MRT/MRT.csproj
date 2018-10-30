@@ -333,6 +333,7 @@
     <Compile Include="Dtos\StateCoverageDto.cs" />
     <Compile Include="Dtos\StateDto.cs" />
     <Compile Include="Dtos\WCRateDto.cs" />
+    <Compile Include="Extensions\GeneralExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using MRT.Models;
 using MRT.ViewModels;
 using MRT.DataContexts;
+using MRT.Extensions;
 
 namespace MRT.Controllers
 {
@@ -40,7 +41,7 @@ namespace MRT.Controllers
         public async Task<ActionResult> Edit(int id)
         {
             var policy = await _context.Policies.FirstOrDefaultAsync(p => p.Id == id);
-            if (policy == null)
+            if (policy.IsNull())
                 return HttpNotFound();
 
             var viewModel = new PolicyFormViewModel(policy)
@@ -97,7 +98,7 @@ namespace MRT.Controllers
         {
             ViewBag.Title = "Policies";
             ViewBag.PoliciesActive = "active";
-            return View();
+            return View("Index");
         }
     }
 }

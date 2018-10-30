@@ -13,7 +13,7 @@ namespace MRT.Controllers
         {
             ViewBag.Title = "Worker's Compensation Rates";
             ViewBag.WCRatesActive = "active";
-            return View();
+            return View("Index");
         }
     }
 }

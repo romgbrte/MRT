@@ -13,35 +13,35 @@ namespace MRT.Controllers
         {
             Response.TrySkipIisCustomErrors = true;
             Response.StatusCode = (int)HttpStatusCode.NotFound;
-            return View();
+            return View("NotFound");
         }
 
         public ActionResult Internal()
         {
             Response.TrySkipIisCustomErrors = true;
             Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            return View();
+            return View("Internal");
         }
 
         public ActionResult Unauthorized()
         {
             Response.TrySkipIisCustomErrors = true;
             Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-            return View();
+            return View("Unauthorized");
         }
 
         public ActionResult Forbidden()
         {
             Response.TrySkipIisCustomErrors = true;
             Response.StatusCode = (int)HttpStatusCode.Forbidden;
-            return View();
+            return View("Forbidden");
         }
 
         public ActionResult BadRequest()
         {
             Response.TrySkipIisCustomErrors = true;
             Response.StatusCode = (int)HttpStatusCode.BadRequest;
-            return View();
+            return View("BadRequest");
         }
     }
 }

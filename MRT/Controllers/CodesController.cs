@@ -13,7 +13,7 @@ namespace MRT.Controllers
         {
             ViewBag.Title = "Codes";
             ViewBag.CodesActive = "active";
-            return View();
+            return View("Index");
         }
     }
 }

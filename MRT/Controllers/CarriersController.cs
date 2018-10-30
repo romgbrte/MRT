@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using MRT.Models;
 using MRT.ViewModels;
 using MRT.DataContexts;
+using MRT.Extensions;
 
 namespace MRT.Controllers
 {
@@ -38,7 +39,7 @@ namespace MRT.Controllers
         public async Task<ActionResult> Edit(int id)
         {
             var carrier = await _context.Carriers.SingleOrDefaultAsync(p => p.Id == id);
-            if (carrier == null)
+            if (carrier.IsNull())
                 return HttpNotFound("Carrier does not exist");
 
             var states = await _context.States.ToListAsync();
@@ -99,7 +100,7 @@ namespace MRT.Controllers
         {
             ViewBag.Title = "Carriers";
             ViewBag.CarriersActive = "active";
-            return View();
+            return View("Index");
         }
     }
 }

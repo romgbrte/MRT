@@ -7,6 +7,7 @@ using System.Web.Http;
 using MRT.Models;
 using MRT.Dtos;
 using MRT.DataContexts;
+using MRT.Extensions;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 
@@ -50,7 +51,7 @@ namespace MRT.Controllers.Api
                 .Where(c => c.CarrierId == stateCoverageDto.CarrierId)
                 .SingleOrDefaultAsync(s => s.StateId == stateCoverageDto.StateId);
 
-            if (existingStateCoverage != null)
+            if (existingStateCoverage.IsNotNull())
                 return BadRequest("Record already exists");
 
             var newStateCoverage = Mapper.Map<StateCoverageDto, StateCoverage>(stateCoverageDto);
@@ -71,7 +72,7 @@ namespace MRT.Controllers.Api
                 .Where(c => c.CarrierId == stateCoverageDto.CarrierId)
                 .SingleOrDefaultAsync(s => s.StateId == stateCoverageDto.StateId);
 
-            if (stateCoverage == null)
+            if (stateCoverage.IsNull())
                 return NotFound();
 
             _context.StateCoverages.Remove(stateCoverage);
