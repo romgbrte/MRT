@@ -8,21 +8,19 @@ using System.Web;
 using System.Web.Mvc;
 using MRT.Models;
 using MRT.ViewModels;
-using MRT.DataContexts;
 using MRT.Extensions;
+using MRT.Services;
 
 namespace MRT.Controllers
 {
     public class PoliciesController : Controller
     {
-        private DataDb _context;
+        private PolicyService _policyService;
+        private PolicyTypeService _policyTypeService;
         public PoliciesController()
         {
-            _context = new DataDb();
-        }
-        protected override void Dispose(bool disposing)
-        {
-            _context.Dispose();
+            _policyService = new PolicyService();
+            _policyTypeService = new PolicyTypeService();
         }
 
         [HttpGet]
@@ -30,7 +28,7 @@ namespace MRT.Controllers
         {
             var viewModel = new PolicyFormViewModel()
             {
-                PolicyTypes = await _context.PolicyTypes.ToListAsync()
+                PolicyTypes = await _policyTypeService.GetPolicyTypeListAsync()
             };
 
             ViewBag.Title = "New Policy";
@@ -40,13 +38,13 @@ namespace MRT.Controllers
         [HttpGet]
         public async Task<ActionResult> Edit(int id)
         {
-            var policy = await _context.Policies.FirstOrDefaultAsync(p => p.Id == id);
+            var policy = await _policyService.GetSinglePolicyAsync(id);
             if (policy.IsNull())
                 return HttpNotFound();
 
             var viewModel = new PolicyFormViewModel(policy)
             {
-                PolicyTypes = await _context.PolicyTypes.ToListAsync()
+                PolicyTypes = await _policyTypeService.GetPolicyTypeListAsync()
             };
 
             ViewBag.Title = "Edit Policy";
@@ -61,7 +59,7 @@ namespace MRT.Controllers
             {
                 var newViewModel = new PolicyFormViewModel(policy)
                 {
-                    PolicyTypes = await _context.PolicyTypes.ToListAsync()
+                    PolicyTypes = await _policyTypeService.GetPolicyTypeListAsync()
                 };
 
                 return View("PolicyForm", newViewModel);
@@ -69,14 +67,14 @@ namespace MRT.Controllers
 
             if (policy.Id == 0)
             {
-                _context.Policies.Add(policy);
-                await _context.SaveChangesAsync();
+                _policyService.AddPolicy(policy);
+                await _policyService.SavePolicyChangesAsync();
 
                 return RedirectToAction("Create", "PolicyAssignments", new { id = policy.Id });
             }
             else
             {
-                var existingPolicy = await _context.Policies.SingleAsync(p => p.Id == policy.Id);
+                var existingPolicy = await _policyService.GetSinglePolicyAsync(policy.Id);
 
                 existingPolicy.Number = policy.Number;
                 existingPolicy.StartDate = policy.StartDate;
@@ -86,13 +84,12 @@ namespace MRT.Controllers
                 existingPolicy.CollateralRate = policy.CollateralRate;
                 existingPolicy.LossRate = policy.LossRate;
 
-                await _context.SaveChangesAsync();
+                await _policyService.SavePolicyChangesAsync();
 
                 return RedirectToAction("Index", "Policies");
             }
         }
-
-        // GET: Policies
+        
         [HttpGet]
         public ActionResult Index()
         {

@@ -6,21 +6,21 @@ using System.Linq;
 using System.Web.Mvc;
 using MRT.Models;
 using MRT.ViewModels;
-using MRT.DataContexts;
 using MRT.Extensions;
+using MRT.Services;
 
 namespace MRT.Controllers
 {
     public class CarriersController : Controller
     {
-        private DataDb _context;
+        private CarrierService _carrierService;
+        private StateService _stateService;
+        private StateCoverageService _stateCoverageService;
         public CarriersController()
         {
-            _context = new DataDb();
-        }
-        protected override void Dispose(bool disposing)
-        {
-            _context.Dispose();
+            _carrierService = new CarrierService();
+            _stateService = new StateService();
+            _stateCoverageService = new StateCoverageService();
         }
 
         [HttpGet]
@@ -28,7 +28,7 @@ namespace MRT.Controllers
         {
             var viewModel = new CarrierFormViewModel()
             {
-                StatesNotCovered = await _context.States.ToListAsync()
+                StatesNotCovered = await _stateService.GetListOfStatesAsync()
             };
 
             ViewBag.Title = "New Carrier";
@@ -38,20 +38,19 @@ namespace MRT.Controllers
         [HttpGet]
         public async Task<ActionResult> Edit(int id)
         {
-            var carrier = await _context.Carriers.SingleOrDefaultAsync(p => p.Id == id);
+            var carrier = await _carrierService.GetSingleCarrierAsync(id);
             if (carrier.IsNull())
                 return HttpNotFound("Carrier does not exist");
 
-            var states = await _context.States.ToListAsync();
-            var stateCoverages = await _context.StateCoverages
-                .Where(c => c.CarrierId == id)
-                .Select(s => s.StateId)
-                .ToListAsync();
+            var states = await _stateService.GetListOfStatesAsync();
+
+            var stateCoverages = await _stateCoverageService.GetListOfStateCoveragesAsync(id);
+            var stateCoverageIds = stateCoverages.Select(s => s.StateId);
 
             var viewModel = new CarrierFormViewModel(carrier)
             {
-                StatesCovered = states.Where(s => stateCoverages.Contains(s.Id)).ToList(),
-                StatesNotCovered = states.Where(s => !stateCoverages.Contains(s.Id)).ToList()
+                StatesCovered = states.Where(s => stateCoverageIds.Contains(s.Id)).ToList(),
+                StatesNotCovered = states.Where(s => !stateCoverageIds.Contains(s.Id)).ToList()
             };
 
             ViewBag.Title = "Edit Carrier";
@@ -64,37 +63,35 @@ namespace MRT.Controllers
         {
             if(!ModelState.IsValid)
             {
-                var states = await _context.States.ToListAsync();
-                var stateCoverages = await _context.StateCoverages
-                    .Where(c => c.CarrierId == carrier.Id)
-                    .Select(s => s.StateId)
-                    .ToListAsync();
+                var states = await _stateService.GetListOfStatesAsync();
+
+                var stateCoverages = await _stateCoverageService.GetListOfStateCoveragesAsync(carrier.Id);
+                var stateCoverageIds = stateCoverages.Select(s => s.StateId);
 
                 var carrierViewModel = new CarrierFormViewModel(carrier)
                 {
-                    StatesCovered = states.Where(s => stateCoverages.Contains(s.Id)).ToList(),
-                    StatesNotCovered = states.Where(s => !stateCoverages.Contains(s.Id)).ToList()
+                    StatesCovered = states.Where(s => stateCoverageIds.Contains(s.Id)).ToList(),
+                    StatesNotCovered = states.Where(s => !stateCoverageIds.Contains(s.Id)).ToList()
                 };
 
                 return View("CarrierForm", carrierViewModel);
             }
 
             if (carrier.Id == 0)
-                _context.Carriers.Add(carrier);
+                _carrierService.AddCarrier(carrier);
             else
             {
-                var existingCarrier = await _context.Carriers.SingleAsync(c => c.Id == carrier.Id);
+                var existingCarrier = await _carrierService.GetSingleCarrierAsync(carrier.Id);
 
                 existingCarrier.Name = carrier.Name;
                 existingCarrier.BaseRate = carrier.BaseRate;
             }
 
-            await _context.SaveChangesAsync();
+            await _carrierService.SaveCarrierChangesAsync();
 
             return RedirectToAction("Index", "Carriers");
         }
-
-        // GET: Carriers
+        
         [HttpGet]
         public ActionResult Index()
         {

@@ -12,6 +12,7 @@ namespace MRT.ViewModels
         public int Id { get; set; }
 
         [Required]
+        [MinLength(10)]
         [StringLength(50)]
         [Display(Name = "Carrier Name")]
         public string Name { get; set; }
