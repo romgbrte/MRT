@@ -1,34 +1,27 @@
-﻿using System;
-using System.Data.Entity;
-using System.Collections.Generic;
+﻿using System.Data.Entity;
 using System.Threading.Tasks;
-using System.Linq;
 using System.Web.Http;
-using MRT.Dtos;
-using MRT.DataContexts;
-using MRT.Authentication_Authorization;
-using AutoMapper.QueryableExtensions;
+using MRT.Services;
+using MRT.Services.Interfaces;
 
 namespace MRT.Controllers.Api
 {
     public class CodesController : ApiController
     {
-        private DataDb _context;
+        private ICodeDtoService _codeService;
         public CodesController()
         {
-            _context = new DataDb();
+            _codeService = new CodeDtoService();
         }
-        protected override void Dispose(bool disposing)
+        public CodesController(ICodeDtoService codeSrv)
         {
-            _context.Dispose();
+            _codeService = codeSrv;
         }
         
         [HttpGet]
         public async Task<IHttpActionResult> GetCodes()
         {
-            var codeDtos = await _context.Codes
-                .ProjectTo<CodeDto>()
-                .ToListAsync();
+            var codeDtos = await _codeService.GetCodeDtoListAsync();
 
             return Ok(codeDtos);
         }

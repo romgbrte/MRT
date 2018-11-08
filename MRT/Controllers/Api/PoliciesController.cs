@@ -1,36 +1,30 @@
-﻿using System;
-using System.Data.Entity;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
-using MRT.Dtos;
-using MRT.DataContexts;
-using AutoMapper.QueryableExtensions;
+using MRT.Services;
+using MRT.Services.Interfaces;
 
 namespace MRT.Controllers.Api
 {
     public class PoliciesController : ApiController
     {
-        private DataDb _context;
+        private IPolicyDtoService _policyDtoService;
+
         public PoliciesController()
         {
-            _context = new DataDb();
+            _policyDtoService = new PolicyDtoService();
         }
-        protected override void Dispose(bool disposing)
+
+        public PoliciesController(IPolicyDtoService policyDtoSrv)
         {
-            _context.Dispose();
+            _policyDtoService = policyDtoSrv;
         }
 
         [HttpGet]
         public async Task<IHttpActionResult> GetPolicies()
         {
-            var policies = await _context.Policies
-                .Include(p => p.PolicyType)
-                .ProjectTo<PolicyDto>()
-                .ToListAsync();
+            var policyDtos = await _policyDtoService.GetPolicyDtoListAsync();
 
-            return Ok(policies);
+            return Ok(policyDtos);
         }
     }
 }

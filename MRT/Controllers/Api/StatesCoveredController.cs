@@ -1,41 +1,37 @@
-﻿using System;
-using System.Data.Entity;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Linq;
 using System.Web.Http;
-using MRT.Models;
 using MRT.Dtos;
-using MRT.DataContexts;
 using MRT.Extensions;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
+using MRT.Services;
+using MRT.Services.Interfaces;
 
 namespace MRT.Controllers.Api
 {
     public class StatesCoveredController : ApiController
     {
-        private DataDb _context;
+        private IStateCoverageDtoService _stateCoverageDtoService;
+
         public StatesCoveredController()
         {
-            _context = new DataDb();
+            _stateCoverageDtoService = new StateCoverageDtoService();
         }
-        protected override void Dispose(bool disposing)
+
+        public StatesCoveredController(IStateCoverageDtoService stateCoverageDtoSrv)
         {
-            _context.Dispose();
+            _stateCoverageDtoService = stateCoverageDtoSrv;
         }
 
         // get a list of the states covered by a carrier
         [HttpGet]
         public async Task<IHttpActionResult> GetStatesCovered(int id) // CarrierId
         {
-            var statesCovered = await _context.StateCoverages
-                .Include(s => s.State)
-                .Where(c => c.CarrierId == id)
-                .Select(s => s.State)
+            int carrierId = id;
+
+            var stateCoverages = await _stateCoverageDtoService.GetListOfStateCoverageDtosByCarrierAsync(carrierId);
+            var statesCovered = stateCoverages.Select(s => s.State)
                 .OrderBy(s => s.Id)
-                .ProjectTo<StateDto>()
-                .ToListAsync();
+                .ToList();
 
             return Ok(statesCovered);
         }
@@ -47,16 +43,14 @@ namespace MRT.Controllers.Api
             if (!ModelState.IsValid)
                 return BadRequest("Model state is not valid");
 
-            var existingStateCoverage = await _context.StateCoverages
-                .Where(c => c.CarrierId == stateCoverageDto.CarrierId)
-                .SingleOrDefaultAsync(s => s.StateId == stateCoverageDto.StateId);
+            var existingStateCoverage = await _stateCoverageDtoService
+                .GetStateCoverageByCarrierAndStateAsync(stateCoverageDto.CarrierId, stateCoverageDto.StateId);
 
             if (existingStateCoverage.IsNotNull())
                 return BadRequest("Record already exists");
 
-            var newStateCoverage = Mapper.Map<StateCoverageDto, StateCoverage>(stateCoverageDto);
-            _context.StateCoverages.Add(newStateCoverage);
-            await _context.SaveChangesAsync();
+            _stateCoverageDtoService.AddStateCoverage(stateCoverageDto);
+            await _stateCoverageDtoService.SaveStateCoverageChangesAsync();
 
             return Ok();
         }
@@ -68,15 +62,14 @@ namespace MRT.Controllers.Api
             if (!ModelState.IsValid)
                 return BadRequest("Model state is not valid");
 
-            var stateCoverage = await _context.StateCoverages
-                .Where(c => c.CarrierId == stateCoverageDto.CarrierId)
-                .SingleOrDefaultAsync(s => s.StateId == stateCoverageDto.StateId);
+            var existingStateCoverage = await _stateCoverageDtoService
+                .GetStateCoverageByCarrierAndStateAsync(stateCoverageDto.CarrierId, stateCoverageDto.StateId);
 
-            if (stateCoverage.IsNull())
+            if (existingStateCoverage.IsNull())
                 return NotFound();
 
-            _context.StateCoverages.Remove(stateCoverage);
-            await _context.SaveChangesAsync();
+            _stateCoverageDtoService.RemoveStateCoverage(stateCoverageDto);
+            await _stateCoverageDtoService.SaveStateCoverageChangesAsync();
 
             return Ok();
         }

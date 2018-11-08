@@ -1,39 +1,31 @@
-﻿using System;
-using System.Data.Entity;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
-using MRT.Dtos;
-using MRT.DataContexts;
-using AutoMapper.QueryableExtensions;
+using MRT.Services;
+using MRT.Services.Interfaces;
 
 namespace MRT.Controllers.Api
 {
     public class WCRatesController : ApiController
     {
-        private DataDb _context;
+        private IWCRateDtoService _wcRateDtoService;
+
         public WCRatesController()
         {
-            _context = new DataDb();
+            _wcRateDtoService = new WCRateDtoService();
         }
-        protected override void Dispose(bool disposing)
+
+        public WCRatesController(IWCRateDtoService wcRateDtoSrv)
         {
-            _context.Dispose();
+            _wcRateDtoService = wcRateDtoSrv;
         }
 
         // GET /api/wcrates
         [HttpGet]
         public async Task<IHttpActionResult> GetWCRates()
         {
-            var wcratesDtos = await _context.WCRates
-                .Include(ca => ca.Carrier)
-                .Include(s => s.State)
-                .Include(co => co.Code)
-                .ProjectTo<WCRateDto>()
-                .ToListAsync();
+            var wcRateDtos = await _wcRateDtoService.GetWCRateDtoListAsync();
 
-            return Ok(wcratesDtos);
+            return Ok(wcRateDtos);
         }
     }
 }

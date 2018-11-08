@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using MRT.Models;
-using MRT.ViewModels;
 using MRT.DataContexts;
+using MRT.Services.Interfaces;
 
 namespace MRT.Services
 {
-    public class StateCoverageService
+    public class StateCoverageService : IStateCoverageService
     {
         private DataDb _context;
+
         public StateCoverageService()
         {
             _context = new DataDb();
@@ -25,9 +24,9 @@ namespace MRT.Services
             return stateCoverages;
         }
 
-        public async Task<List<StateCoverage>> GetListOfStateCoveragesAsync(int id)
+        public async Task<List<StateCoverage>> GetListOfStateCoveragesByCarrierAsync(int carrierId)
         {
-            var stateCoverages = await _context.StateCoverages.Where(c => c.CarrierId == id).ToListAsync();
+            var stateCoverages = await _context.StateCoverages.Where(c => c.CarrierId == carrierId).ToListAsync();
 
             return stateCoverages;
         }

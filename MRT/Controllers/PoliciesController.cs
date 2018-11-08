@@ -1,26 +1,28 @@
-﻿using System;
-using System.Data.Entity;
-using System.ComponentModel.DataAnnotations;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Web;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using MRT.Models;
 using MRT.ViewModels;
 using MRT.Extensions;
 using MRT.Services;
+using MRT.Services.Interfaces;
 
 namespace MRT.Controllers
 {
     public class PoliciesController : Controller
     {
-        private PolicyService _policyService;
-        private PolicyTypeService _policyTypeService;
+        private IPolicyService _policyService;
+        private IPolicyTypeService _policyTypeService;
+
         public PoliciesController()
         {
             _policyService = new PolicyService();
             _policyTypeService = new PolicyTypeService();
+        }
+
+        public PoliciesController(IPolicyService policySrv, IPolicyTypeService policyTypeSrv)
+        {
+            _policyService = policySrv;
+            _policyTypeService = policyTypeSrv;
         }
 
         [HttpGet]

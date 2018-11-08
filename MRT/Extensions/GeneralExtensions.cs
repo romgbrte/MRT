@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace MRT.Extensions
+﻿namespace MRT.Extensions
 {
     public static class GeneralExtensions
     {

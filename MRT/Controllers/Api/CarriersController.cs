@@ -1,38 +1,40 @@
-﻿using System;
-using System.Data.Entity;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Web.Http;
-using MRT.Models;
 using MRT.Dtos;
-using MRT.DataContexts;
 using MRT.Services;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
+using MRT.Services.Interfaces;
 
 namespace MRT.Controllers.Api
 {
     public class CarriersController : ApiController
     {
-        private DataDb _context;
+        private ICarrierDtoService _carrierDtoService;
+        private IStateDtoService _stateDtoService;
+        private IStateCoverageDtoService _stateCoverageDtoService;
+
         public CarriersController()
         {
-            _context = new DataDb();
+            _carrierDtoService = new CarrierDtoService();
+            _stateDtoService = new StateDtoService();
+            _stateCoverageDtoService = new StateCoverageDtoService();
         }
-        protected override void Dispose(bool disposing)
+
+        public CarriersController(ICarrierDtoService carrierDtoSrv, 
+            IStateDtoService stateDtoSrv, IStateCoverageDtoService stateCoverageDtoSrv)
         {
-            _context.Dispose();
+            _carrierDtoService = carrierDtoSrv;
+            _stateDtoService = stateDtoSrv;
+            _stateCoverageDtoService = stateCoverageDtoSrv;
         }
 
         [HttpGet]
         public async Task<IHttpActionResult> GetCarriers()
         {
-            var carrierDtos = await _context.Carriers
-                .ProjectTo<CarrierDto>()
-                .ToListAsync();
-            var stateCoverages = await _context.StateCoverages.ToListAsync();
-            var states = await _context.States.ToListAsync();
+            var carrierDtos = await _carrierDtoService.GetCarrierDtoListAsync();
+            var stateCoverages = await _stateCoverageDtoService.GetListOfStateCoverageDtosAsync();
+            var states = await _stateDtoService.GetListOfStateDtosAsync();
 
             foreach (var carrierDto in carrierDtos)
             {
@@ -40,9 +42,7 @@ namespace MRT.Controllers.Api
                     .Where(c => c.CarrierId == carrierDto.Id)
                     .Select(s => s.StateId)
                     .ToList();
-                carrierDto.StatesCovered = states.Where(s => carrierStates.Contains(s.Id))
-                    .Select(Mapper.Map<State, StateDto>)
-                    .ToList();
+                carrierDto.StatesCovered = states.Where(s => carrierStates.Contains(s.Id)).ToList();
                 carrierDto.StatesNotCovered = new List<StateDto>();
             }
 

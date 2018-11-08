@@ -1,67 +1,60 @@
-﻿using System;
-using System.Data.Entity;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
-using MRT.Models;
-using MRT.Dtos;
-using MRT.DataContexts;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
+using MRT.Services;
+using MRT.Services.Interfaces;
 
 namespace MRT.Controllers.Api
 {
     public class PolicyAssignmentsController : ApiController
     {
-        private DataDb _context;
+        private IPolicyAssignmentDtoService _policyAssignmentDtoService;
+
         public PolicyAssignmentsController()
         {
-            _context = new DataDb();
+            _policyAssignmentDtoService = new PolicyAssignmentDtoService();
         }
-        protected override void Dispose(bool disposing)
+
+        public PolicyAssignmentsController(IPolicyAssignmentDtoService policyAssignmentDtoSrv)
         {
-            _context.Dispose();
+            _policyAssignmentDtoService = policyAssignmentDtoSrv;
         }
 
         [HttpGet]
         public async Task<IHttpActionResult> GetPolicyAssignments()
         {
-            var policyAssignments = await _context.PolicyAssignments
-                .Include(c => c.Carrier)
-                .Include(p => p.Policy)
-                .ProjectTo<PolicyAssignmentDto>()
-                .ToListAsync();
+            var policyAssignmentDtos = await _policyAssignmentDtoService.GetPolicyAssignmentDtoListAsync();
 
-            return Ok(policyAssignments);
+            return Ok(policyAssignmentDtos);
         }
 
         [HttpGet]
-        public async Task<IHttpActionResult> GetPolicyAssignments(int id)
+        public async Task<IHttpActionResult> GetPolicyAssignment(int id)
         {
-            var policyAssignmentDto = await _context.PolicyAssignments
-                .Include(c => c.Carrier)
-                .ProjectTo<PolicyAssignmentDto>()
-                .SingleAsync(p => p.PolicyId == id);
+            int policyId = id;
+
+            var policyAssignmentDto = await _policyAssignmentDtoService.GetPolicyAssignmentDtoByPolicyAsync(policyId);
 
             return Ok(policyAssignmentDto);
         }
         
+        /*
         [HttpPost]
-        public IHttpActionResult CreatePolicyAssignment(PolicyAssignmentDto policyAssignmentDto)
+        public async Task<IHttpActionResult> CreatePolicyAssignment(PolicyAssignmentDto policyAssignmentDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest("There was an error with carrier assignment");
 
-            var currentPolicyAssignment = _context.PolicyAssignments
-                .Where(c => c.CarrierId == policyAssignmentDto.CarrierId)
-                .Single(a => a.IsActive);
+            var policyAssignmentDtos = await _policyAssignmentDtoService
+                .GetPolicyAssignmentDtoListByCarrierAsync(policyAssignmentDto.CarrierId);
+
+            var currentPolicyAssignment = policyAssignmentDtos.Single(a => a.IsActive);
             currentPolicyAssignment.IsActive = false;
 
-            _context.PolicyAssignments.Add(Mapper.Map<PolicyAssignmentDto, PolicyAssignment>(policyAssignmentDto));
-            _context.SaveChanges();
+            _policyAssignmentDtoService.AddPolicyAssignment(policyAssignmentDto);
+            await _policyAssignmentDtoService.SavePolicyAssignmentChangesAsync();
 
             return Ok();
         }
+        */
     }
 }

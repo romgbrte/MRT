@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.ComponentModel.DataAnnotations;
+using MRT.Tests.Helpers;
 using MRT.ViewModels;
 using MRT.ViewModels.Utilities;
 

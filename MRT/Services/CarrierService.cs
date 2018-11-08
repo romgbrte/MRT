@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using MRT.Models;
-using MRT.ViewModels;
+using System.Threading.Tasks;
 using MRT.DataContexts;
+using MRT.Models;
+using MRT.Services.Interfaces;
 
 namespace MRT.Services
 {
-    public class CarrierService
+    public class CarrierService : ICarrierService
     {
         private DataDb _context;
         public CarrierService()

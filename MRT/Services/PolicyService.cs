@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 using MRT.Models;
-using MRT.ViewModels;
 using MRT.DataContexts;
+using MRT.Services.Interfaces;
 
 namespace MRT.Services
 {
-    public class PolicyService
+    public class PolicyService : IPolicyService
     {
         private DataDb _context;
         public PolicyService()

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using AutoMapper;
+﻿using AutoMapper;
 using MRT.Models;
 using MRT.Dtos;
-using MRT.ViewModels;
 
 namespace MRT.App_Start
 {

@@ -1,26 +1,33 @@
-﻿using System;
-using System.Data.Entity;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Linq;
 using System.Web.Mvc;
 using MRT.Models;
 using MRT.ViewModels;
 using MRT.Extensions;
 using MRT.Services;
+using MRT.Services.Interfaces;
 
 namespace MRT.Controllers
 {
     public class CarriersController : Controller
     {
-        private CarrierService _carrierService;
-        private StateService _stateService;
-        private StateCoverageService _stateCoverageService;
+        private ICarrierService _carrierService;
+        private IStateService _stateService;
+        private IStateCoverageService _stateCoverageService;
+
         public CarriersController()
         {
             _carrierService = new CarrierService();
             _stateService = new StateService();
             _stateCoverageService = new StateCoverageService();
+        }
+
+        public CarriersController(ICarrierService carrierSrv, 
+            IStateService stateSrv, IStateCoverageService stateCoverageSrv)
+        {
+            _carrierService = carrierSrv;
+            _stateService = stateSrv;
+            _stateCoverageService = stateCoverageSrv;
         }
 
         [HttpGet]
@@ -44,7 +51,7 @@ namespace MRT.Controllers
 
             var states = await _stateService.GetListOfStatesAsync();
 
-            var stateCoverages = await _stateCoverageService.GetListOfStateCoveragesAsync(id);
+            var stateCoverages = await _stateCoverageService.GetListOfStateCoveragesByCarrierAsync(id);
             var stateCoverageIds = stateCoverages.Select(s => s.StateId);
 
             var viewModel = new CarrierFormViewModel(carrier)
@@ -65,7 +72,7 @@ namespace MRT.Controllers
             {
                 var states = await _stateService.GetListOfStatesAsync();
 
-                var stateCoverages = await _stateCoverageService.GetListOfStateCoveragesAsync(carrier.Id);
+                var stateCoverages = await _stateCoverageService.GetListOfStateCoveragesByCarrierAsync(carrier.Id);
                 var stateCoverageIds = stateCoverages.Select(s => s.StateId);
 
                 var carrierViewModel = new CarrierFormViewModel(carrier)
