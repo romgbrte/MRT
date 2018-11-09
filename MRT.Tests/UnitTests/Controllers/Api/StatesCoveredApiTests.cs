@@ -29,7 +29,7 @@ namespace MRT.Tests.UnitTests.Controllers.Api
         public void TestInit()
         {
             mStateCoverageDtoService = new Mock<IStateCoverageDtoService>();
-
+            
             stateDtos = new List<StateDto>()
             {
                 new StateDto { Id = 1, Name = "Alabama", Abbreviation = "AL" },
@@ -44,6 +44,7 @@ namespace MRT.Tests.UnitTests.Controllers.Api
                 new StateCoverageDto { Id = 3, CarrierId = 3, StateId = 3, State = stateDtos[2] }
             };
             mStateCoverageDtoService.Setup(m => m.GetListOfStateCoverageDtosAsync()).ReturnsAsync(stateCoverageDtos);
+
             stateCoverageDtosByCarrier = new List<StateCoverageDto>()
             {
                 new StateCoverageDto { Id = 1, CarrierId = 2, StateId = 1, State = stateDtos[0] },
@@ -53,9 +54,13 @@ namespace MRT.Tests.UnitTests.Controllers.Api
             mStateCoverageDtoService
                 .Setup(m => m.GetListOfStateCoverageDtosByCarrierAsync(It.Is<int>(i => i == 2)))
                 .ReturnsAsync(stateCoverageDtosByCarrier);
-            mStateCoverageDtoService
+
+            //var state = new State { Id = 2, Name = "Georgia", Abbreviation = "GA" };
+            //var stateCoverage = new StateCoverage { Id = 2, CarrierId = 2, StateId = 2, State = state };
+            /*mStateCoverageDtoService
                 .Setup(m => m.GetStateCoverageByCarrierAndStateAsync(It.Is<int>(i => i == 2), It.Is<int>(i => i == 2)))
-                .ReturnsAsync(stateCoverageDtosByCarrier[1]);
+                .ReturnsAsync(stateCoverage);*/
+
             mStateCoverageDtoService.Setup(m => m.AddStateCoverage(It.IsAny<StateCoverageDto>()));
             mStateCoverageDtoService.Setup(m => m.RemoveStateCoverage(It.IsAny<StateCoverageDto>()));
             mStateCoverageDtoService.Setup(m => m.SaveStateCoverageChangesAsync()).ReturnsAsync(1);
@@ -88,8 +93,8 @@ namespace MRT.Tests.UnitTests.Controllers.Api
         {
             // Arrange
             var apiController = new StatesCoveredController(mStateCoverageDtoService.Object);
-            var stateDto = new StateDto { Id = 1, Name = "Alabama", Abbreviation = "AL" };
-            var stateCoverageDto = new StateCoverageDto { Id = 1, CarrierId = 1, StateId = 1, State = stateDto };
+            var stateDto = new StateDto { Id = 6, Name = "Florida", Abbreviation = "FL" };
+            var stateCoverageDto = new StateCoverageDto { Id = 1, CarrierId = 2, StateId = 6, State = stateDto };
 
             // Act
             var result = await apiController.CreateStateCoverage(stateCoverageDto) as OkResult;

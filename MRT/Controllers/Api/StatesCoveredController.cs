@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Web.Http;
 using MRT.Dtos;
-using MRT.Extensions;
 using MRT.Services;
 using MRT.Services.Interfaces;
 
@@ -43,10 +42,12 @@ namespace MRT.Controllers.Api
             if (!ModelState.IsValid)
                 return BadRequest("Model state is not valid");
 
-            var existingStateCoverage = await _stateCoverageDtoService
-                .GetStateCoverageByCarrierAndStateAsync(stateCoverageDto.CarrierId, stateCoverageDto.StateId);
+            var existingStateCoverages = await _stateCoverageDtoService
+                .GetListOfStateCoverageDtosByCarrierAsync(stateCoverageDto.CarrierId);
 
-            if (existingStateCoverage.IsNotNull())
+            var existingCoverage = existingStateCoverages.FirstOrDefault(s => s.StateId == stateCoverageDto.StateId);
+            
+            if(existingCoverage != null)
                 return BadRequest("Record already exists");
 
             _stateCoverageDtoService.AddStateCoverage(stateCoverageDto);
@@ -62,13 +63,15 @@ namespace MRT.Controllers.Api
             if (!ModelState.IsValid)
                 return BadRequest("Model state is not valid");
 
-            var existingStateCoverage = await _stateCoverageDtoService
-                .GetStateCoverageByCarrierAndStateAsync(stateCoverageDto.CarrierId, stateCoverageDto.StateId);
+            var carrierStateCoverages = await _stateCoverageDtoService
+                .GetListOfStateCoverageDtosByCarrierAsync(stateCoverageDto.CarrierId);
 
-            if (existingStateCoverage.IsNull())
+            int numberExisting = carrierStateCoverages.Where(s => s.StateId == stateCoverageDto.StateId).Count();
+            if (numberExisting == 0)
                 return NotFound();
 
-            _stateCoverageDtoService.RemoveStateCoverage(stateCoverageDto);
+            for(int i = 0; i < numberExisting; i++)
+                _stateCoverageDtoService.RemoveStateCoverage(stateCoverageDto);
             await _stateCoverageDtoService.SaveStateCoverageChangesAsync();
 
             return Ok();

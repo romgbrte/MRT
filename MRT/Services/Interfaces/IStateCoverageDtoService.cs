@@ -1,4 +1,5 @@
 ﻿using MRT.Dtos;
+using MRT.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace MRT.Services.Interfaces
 
         Task<List<StateCoverageDto>> GetListOfStateCoverageDtosByCarrierAsync(int carrierId);
 
-        Task<StateCoverageDto> GetStateCoverageByCarrierAndStateAsync(int carrierId, int stateId);
+        //StateCoverage GetStateCoverageByCarrierAndState(int carrierId, int stateId);
 
         void AddStateCoverage(StateCoverageDto stateCoverageDto);
 

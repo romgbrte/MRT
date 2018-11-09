@@ -39,15 +39,14 @@ namespace MRT.Services
             return stateCoverageDtos;
         }
 
-        public async Task<StateCoverageDto> GetStateCoverageByCarrierAndStateAsync(int carrierId, int stateId)
+        /*public StateCoverage GetStateCoverageByCarrierAndState(int carrierId, int stateId)
         {
-            var stateCoverageDto = await _context.StateCoverages
+            var stateCoverage = _context.StateCoverages
                 .Where(c => c.CarrierId == carrierId)
-                .ProjectTo<StateCoverageDto>()
-                .SingleOrDefaultAsync(s => s.StateId == stateId);
+                .SingleOrDefault(s => s.StateId == stateId);
 
-            return stateCoverageDto;
-        }
+            return stateCoverage;
+        }*/
 
         public void AddStateCoverage(StateCoverageDto stateCoverageDto)
         {
@@ -56,7 +55,11 @@ namespace MRT.Services
 
         public void RemoveStateCoverage(StateCoverageDto stateCoverageDto)
         {
-            _context.StateCoverages.Remove(Mapper.Map<StateCoverage>(stateCoverageDto));
+            var stateCoverage = _context.StateCoverages
+                .Where(c => c.CarrierId == stateCoverageDto.CarrierId)
+                .FirstOrDefault(s => s.StateId == stateCoverageDto.StateId);
+
+            _context.StateCoverages.Remove(stateCoverage);
         }
 
         public async Task<int> SaveStateCoverageChangesAsync()

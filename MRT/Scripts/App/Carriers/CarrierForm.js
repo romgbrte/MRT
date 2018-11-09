@@ -33,7 +33,9 @@
             data: stateCoverageDto
         })
             .done(function (result) {
-                if ($(destinationList + ' li').length == 0) { }
+                if ($(destinationList + ' li').length == 1) {
+                    $(destinationList).children('.empty-list-notification').remove();
+                }
 
                 stateListItemLink.parent().appendTo(destinationList);
 
@@ -42,7 +44,9 @@
                     return aStr > bStr ? 1 : aStr < bStr ? -1 : 0;
                 }).appendTo(destinationList);
 
-                if ($(sourceList + ' li').length == 0) { }
+                if ($(sourceList + ' li').length == 0) {
+                    $('<li class="empty-list-notification list-group-item">No state coverages</li>').appendTo(sourceList);
+                }
             })
             .fail(function (e) {
                 alert('State coverage could not be altered, please contact the administrator');
