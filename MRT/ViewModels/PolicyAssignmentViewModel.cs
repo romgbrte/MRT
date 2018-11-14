@@ -17,6 +17,7 @@ namespace MRT.ViewModels
         public Policy Policy { get; set; }
 
         [Required]
+        [Display(Name = "Carrier Name")]
         public int CarrierId { get; set; }
 
         public IEnumerable<Carrier> Carriers { get; set; }

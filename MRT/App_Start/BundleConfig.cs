@@ -26,10 +26,10 @@ namespace MRT
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-materia.min.css",
-                      "~/Content/fontawesome/css/all.css",
                       "~/Content/DataTables/css/dataTables.bootstrap4.min.css",
                       "~/Content/DataTables/css/responsive.dataTables.min.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css")
+                      .Include("~/Content/fontawesome/css/all.css", new CssRewriteUrlTransform()));
         }
     }
 }

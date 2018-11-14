@@ -11,7 +11,21 @@
             { data: 'codeNumber' },
             { data: 'rate' }
         ],
-        pageLength: 50
+        pageLength: 25,
+        initComplete: function () {
+            this.api().columns().every(function () {
+                var col = this;
+                var select = $('<select class="form-control form-control-sm"><option value="">[Filter]</option></select>')
+                    .appendTo($(col.footer()).empty())
+                    .on('change', function () {
+                        var value = $.fn.dataTable.util.escapeRegex($(this).val());
+                        col.search(value ? '^' + value + '$' : '', true, false).draw();
+                    });
+                col.data().unique().sort().each(function (d, j) {
+                    select.append('<option value="'+d+'">'+d+'</option>')
+                });
+            });
+        }
     });
 
     $('.dataTables_length').addClass('col-sm-auto dt_topbar_element');

@@ -7,12 +7,12 @@ namespace MRT.DataContexts.DataMigrations
     {
         public override void Up()
         {
-            DropColumn("dbo.Carriers", "CurrentPolicyId");
+            //DropColumn("dbo.Carriers", "CurrentPolicyId");
         }
         
         public override void Down()
         {
-            AddColumn("dbo.Carriers", "CurrentPolicyId", c => c.Int());
+            //AddColumn("dbo.Carriers", "CurrentPolicyId", c => c.Int());
         }
     }
 }
