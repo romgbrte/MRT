@@ -5,6 +5,7 @@ namespace MRT.Controllers
 {
     public class ErrorController : Controller
     {
+        // 404
         public ActionResult NotFound()
         {
             Response.TrySkipIisCustomErrors = true;
@@ -12,6 +13,7 @@ namespace MRT.Controllers
             return View("NotFound");
         }
 
+        // 500
         public ActionResult Internal()
         {
             Response.TrySkipIisCustomErrors = true;
@@ -19,6 +21,7 @@ namespace MRT.Controllers
             return View("Internal");
         }
 
+        // 401
         public ActionResult Unauthorized()
         {
             Response.TrySkipIisCustomErrors = true;
@@ -26,6 +29,7 @@ namespace MRT.Controllers
             return View("Unauthorized");
         }
 
+        // 403
         public ActionResult Forbidden()
         {
             Response.TrySkipIisCustomErrors = true;
@@ -33,6 +37,7 @@ namespace MRT.Controllers
             return View("Forbidden");
         }
 
+        // 400
         public ActionResult BadRequest()
         {
             Response.TrySkipIisCustomErrors = true;

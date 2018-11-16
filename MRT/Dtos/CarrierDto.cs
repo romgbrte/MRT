@@ -20,6 +20,7 @@ namespace MRT.Dtos
 
         public List<StateDto> StatesNotCovered { get; set; }
 
+        // Concatenates and returns State.Abbreviations of States covered by the Carrier, if any
         public string StatesCoveredString
         {
             get

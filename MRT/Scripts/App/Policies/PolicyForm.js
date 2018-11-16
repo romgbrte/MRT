@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+
+    // Help icon content
     $('#policy-popover-carrier').popover({
         title: 'Carrier this Policy is assigned to',
         content: 'The assigned Carrier cannot be changed.',
@@ -35,6 +37,7 @@
         trigger: 'hover click'
     });
 
+    // For an existing Policy, this retrieves the name of the associated Carrier
     var modelPolicyId = $('#policy-form').data('policy-id');
     if (modelPolicyId != 0) {
         $.ajax({

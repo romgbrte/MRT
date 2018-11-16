@@ -70,9 +70,11 @@ namespace MRT.Controllers
                 return View("PolicyAssignmentForm", newViewModel);
             }
 
+            // Check to see if the Carrier being assigned this new Policy already has an active Policy
             var existingPolicyAssignment = await _policyAssignmentService
                 .GetSingleActivePolicyAssignmentAsync(policyAssignment.CarrierId);
 
+            // If so, deactivate that Policy
             if(existingPolicyAssignment.IsNotNull())
                 existingPolicyAssignment.IsActive = false;
 

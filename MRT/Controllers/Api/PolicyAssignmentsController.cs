@@ -22,7 +22,8 @@ namespace MRT.Controllers.Api
         [HttpGet]
         public async Task<IHttpActionResult> GetPolicyAssignments()
         {
-            var policyAssignmentDtos = await _policyAssignmentDtoService.GetPolicyAssignmentDtoListAsync();
+            var policyAssignmentDtos = await _policyAssignmentDtoService
+                .GetPolicyAssignmentDtoListAsync();
 
             return Ok(policyAssignmentDtos);
         }
@@ -32,29 +33,10 @@ namespace MRT.Controllers.Api
         {
             int policyId = id;
 
-            var policyAssignmentDto = await _policyAssignmentDtoService.GetPolicyAssignmentDtoByPolicyAsync(policyId);
+            var policyAssignmentDto = await _policyAssignmentDtoService
+                .GetPolicyAssignmentDtoByPolicyAsync(policyId);
 
             return Ok(policyAssignmentDto);
         }
-        
-        /*
-        [HttpPost]
-        public async Task<IHttpActionResult> CreatePolicyAssignment(PolicyAssignmentDto policyAssignmentDto)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest("There was an error with carrier assignment");
-
-            var policyAssignmentDtos = await _policyAssignmentDtoService
-                .GetPolicyAssignmentDtoListByCarrierAsync(policyAssignmentDto.CarrierId);
-
-            var currentPolicyAssignment = policyAssignmentDtos.Single(a => a.IsActive);
-            currentPolicyAssignment.IsActive = false;
-
-            _policyAssignmentDtoService.AddPolicyAssignment(policyAssignmentDto);
-            await _policyAssignmentDtoService.SavePolicyAssignmentChangesAsync();
-
-            return Ok();
-        }
-        */
     }
 }

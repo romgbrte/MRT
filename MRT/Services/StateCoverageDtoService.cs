@@ -39,15 +39,6 @@ namespace MRT.Services
             return stateCoverageDtos;
         }
 
-        /*public StateCoverage GetStateCoverageByCarrierAndState(int carrierId, int stateId)
-        {
-            var stateCoverage = _context.StateCoverages
-                .Where(c => c.CarrierId == carrierId)
-                .SingleOrDefault(s => s.StateId == stateId);
-
-            return stateCoverage;
-        }*/
-
         public void AddStateCoverage(StateCoverageDto stateCoverageDto)
         {
             _context.StateCoverages.Add(Mapper.Map<StateCoverage>(stateCoverageDto));

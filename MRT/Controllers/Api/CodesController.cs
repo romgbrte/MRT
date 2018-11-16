@@ -9,10 +9,12 @@ namespace MRT.Controllers.Api
     public class CodesController : ApiController
     {
         private ICodeDtoService _codeService;
+
         public CodesController()
         {
             _codeService = new CodeDtoService();
         }
+
         public CodesController(ICodeDtoService codeSrv)
         {
             _codeService = codeSrv;

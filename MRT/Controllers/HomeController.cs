@@ -7,7 +7,7 @@ namespace MRT.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Master Rate Tables";
+            ViewBag.Title = "My Rate Tables";
             return View();
         }
     }

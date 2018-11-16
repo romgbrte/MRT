@@ -52,6 +52,7 @@ namespace MRT.Controllers
             var states = await _stateService.GetListOfStatesAsync();
 
             var stateCoverages = await _stateCoverageService.GetListOfStateCoveragesByCarrierAsync(id);
+            // Extract only the State.Ids in order to build the State lists in the ViewModel
             var stateCoverageIds = stateCoverages.Select(s => s.StateId);
 
             var viewModel = new CarrierFormViewModel(carrier)
@@ -73,6 +74,7 @@ namespace MRT.Controllers
                 var states = await _stateService.GetListOfStatesAsync();
 
                 var stateCoverages = await _stateCoverageService.GetListOfStateCoveragesByCarrierAsync(carrier.Id);
+                // Extract only the State.Ids in order to build the State lists in the ViewModel
                 var stateCoverageIds = stateCoverages.Select(s => s.StateId);
 
                 var carrierViewModel = new CarrierFormViewModel(carrier)

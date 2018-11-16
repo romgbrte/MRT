@@ -72,6 +72,7 @@ namespace MRT.Controllers
                 _policyService.AddPolicy(policy);
                 await _policyService.SavePolicyChangesAsync();
 
+                // Redirect so that the new Policy can be assigned to a Carrier
                 return RedirectToAction("Create", "PolicyAssignments", new { id = policy.Id });
             }
             else
