@@ -11,7 +11,7 @@
             { data: 'codeNumber' },
             { data: 'rate' }
         ],
-        pageLength: 25,
+        pageLength: 10,
         initComplete: function () {
             this.api().columns().every(function () {
                 var col = this;

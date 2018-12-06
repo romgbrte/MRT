@@ -16,7 +16,7 @@ namespace MRT
             //app.UseWebApi(config);
 
             // Can change from AllowAll to send detailed policy info
-            //app.UseCors(CorsOptions.AllowAll);
+            app.UseCors(CorsOptions.AllowAll);
         }
     }
 }
