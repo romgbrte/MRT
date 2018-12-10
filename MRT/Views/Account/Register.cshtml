@@ -11,7 +11,7 @@
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-6 form-control-label" })
+        <label class="col-md-6 form-control-label">E-mail address (an e-mail will not actually be sent)</label>
         <div class="col-md-6">
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
         </div>

@@ -58,9 +58,14 @@
                     $('<li class="empty-list-notification list-group-item">No state coverages</li>')
                         .appendTo(sourceList);
                 }
+
+                // success message
+                var actionTaken = (ajaxMethod == 'post') ? 'added' : 'removed';
+                toastr.success('State coverage successfully ' + actionTaken);
             })
             .fail(function (e) {
-                alert('State coverage could not be altered, please contact the administrator');
+                // failure message
+                toastr.error('State coverage could not be altered, please contact an administrator');
             });
     });
 

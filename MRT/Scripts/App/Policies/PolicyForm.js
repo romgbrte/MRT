@@ -48,7 +48,7 @@
                 $('#assigned-carrier-text').html(policyAssignmentDto != null ? policyAssignmentDto.carrier.name : '');
             })
             .fail(function (e) {
-                console.log('Policy assignment could not be retrieved, please contact the administrator');
+                toastr.error('Assigned policy information could not be retrieved, please contact an administrator');
             });
     }
 });

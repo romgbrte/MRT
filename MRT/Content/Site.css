@@ -150,6 +150,11 @@ select, select.form-control {
     border-right-color: #9C27B0;
 }
 
+/* Toastr */
+.toast-success {
+    background-color: #771e86;
+}
+
 /* Above 'small' size */
 @media (min-width: 768px) {
     .mobile-header {

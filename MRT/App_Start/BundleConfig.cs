@@ -14,6 +14,7 @@ namespace MRT
                         "~/Scripts/DataTables/jquery.dataTables.min.js",
                         "~/Scripts/DataTables/dataTables.responsive.min.js",
                         "~/Scripts/DataTables/dataTables.bootstrap4.min.js",
+                        "~/Scripts/toastr.min.js",
                         "~/Scripts/App/site.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -28,6 +29,7 @@ namespace MRT
                       "~/Content/bootstrap-materia.min.css",
                       "~/Content/DataTables/css/dataTables.bootstrap4.min.css",
                       "~/Content/DataTables/css/responsive.dataTables.min.css",
+                      "~/Content/toastr.min.css",
                       "~/Content/site.css")
                       .Include("~/Content/fontawesome/css/all.css", new CssRewriteUrlTransform()));
         }
