@@ -102,7 +102,8 @@ namespace MRT.Tests.UnitTests.Controllers
             var controller = new PoliciesController(mPolicyService.Object, mPolicyTypeService.Object);
 
             // Act
-            var result = await controller.Save(policies[0]) as RedirectToRouteResult;
+            var policyFormViewModel = new PolicyFormViewModel(policies[0]);
+            var result = await controller.Save(policyFormViewModel) as RedirectToRouteResult;
 
             // Assert
             Assert.IsNotNull(result);

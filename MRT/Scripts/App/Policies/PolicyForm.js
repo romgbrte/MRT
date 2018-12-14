@@ -51,4 +51,10 @@
                 toastr.error('Assigned policy information could not be retrieved, please contact an administrator');
             });
     }
+    
+    $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        orientation: 'bottom right',
+        autoclose: true
+    });
 });

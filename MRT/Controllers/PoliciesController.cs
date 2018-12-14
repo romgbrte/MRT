@@ -55,17 +55,26 @@ namespace MRT.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Save(Policy policy)
+        public async Task<ActionResult> Save(PolicyFormViewModel policyFormViewModel)
         {
             if(!ModelState.IsValid)
             {
-                var newViewModel = new PolicyFormViewModel(policy)
-                {
-                    PolicyTypes = await _policyTypeService.GetPolicyTypeListAsync()
-                };
+                policyFormViewModel.PolicyTypes = await _policyTypeService.GetPolicyTypeListAsync();
 
-                return View("PolicyForm", newViewModel);
+                return View("PolicyForm", policyFormViewModel);
             }
+
+            var policy = new Policy()
+            {
+                Id = policyFormViewModel.Id,
+                Number = policyFormViewModel.Number,
+                StartDate = policyFormViewModel.StartDate,
+                EndDate = policyFormViewModel.EndDate,
+                PolicyTypeId = policyFormViewModel.PolicyTypeId,
+                FundingRate = policyFormViewModel.FundingRate,
+                CollateralRate = policyFormViewModel.CollateralRate,
+                LossRate = policyFormViewModel.LossRate
+            };
 
             if (policy.Id == 0)
             {
@@ -80,8 +89,8 @@ namespace MRT.Controllers
                 var existingPolicy = await _policyService.GetSinglePolicyAsync(policy.Id);
 
                 existingPolicy.Number = policy.Number;
-                existingPolicy.StartDate = policy.StartDate;
-                existingPolicy.EndDate = policy.EndDate;
+                //existingPolicy.StartDate = policy.StartDate;
+                //existingPolicy.EndDate = policy.EndDate;
                 existingPolicy.PolicyTypeId = policy.PolicyTypeId;
                 existingPolicy.FundingRate = policy.FundingRate;
                 existingPolicy.CollateralRate = policy.CollateralRate;

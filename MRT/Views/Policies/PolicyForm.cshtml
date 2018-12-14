@@ -2,6 +2,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" rel="stylesheet" />
 
 <div class="container px-2">
     <h3><i class="fas fa-edit mr-2"></i>@Model.Title</h3>
@@ -46,7 +47,7 @@
                             <i id="policy-popover-startdate" data-toggle="popover" class="fas fa-info-circle info-icon"></i>
                         </div>
                         <div class="col">
-                            @Html.TextBoxFor(p => p.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control px-2" })
+                            @Html.TextBoxFor(p => p.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control datepicker px-2" })
                             @Html.ValidationMessageFor(p => p.StartDate)
                         </div>
                     </div>
@@ -58,7 +59,7 @@
                             <i id="policy-popover-enddate" data-toggle="popover" class="fas fa-info-circle info-icon"></i>
                         </div>
                         <div class="col">
-                            @Html.TextBoxFor(p => p.EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control px-2" })
+                            @Html.TextBoxFor(p => p.EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control datepicker px-2" })
                             @Html.ValidationMessageFor(p => p.EndDate)
                         </div>
                     </div>
@@ -131,4 +132,5 @@
 {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/Scripts/App/Policies/PolicyForm.js")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
 }

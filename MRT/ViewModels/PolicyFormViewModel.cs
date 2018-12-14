@@ -1,8 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using MRT.Models;
 using MRT.ViewModels.Utilities;
 
@@ -16,13 +14,11 @@ namespace MRT.ViewModels
         [StringLength(30)]
         [Display(Name = "Policy Number")]
         public string Number { get; set; }
-
-        [Required]
+        
         [IsStartDateWithinTheNextYear]
         [Display(Name = "Effective Date (YYYY-MM-DD)")]
         public DateTime StartDate { get; set; }
-
-        [Required]
+        
         [IsEndDateWithinTheNextTwoYears]
         [Display(Name = "Effective Until (YYYY-MM-DD)")]
         public DateTime EndDate { get; set; }

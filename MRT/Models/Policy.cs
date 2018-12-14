@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using MRT.ViewModels.Utilities;
 
 namespace MRT.Models
 {
@@ -14,12 +15,10 @@ namespace MRT.Models
         [StringLength(30)]
         [Display(Name = "Policy Number")]
         public string Number { get; set; }
-
-        [Required]
+        
         [Display(Name = "Effective Date")]
         public DateTime StartDate { get; set; }
-
-        [Required]
+        
         [Display(Name = "Effective Until")]
         public DateTime EndDate { get; set; }
 
