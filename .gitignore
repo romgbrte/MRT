@@ -15,6 +15,7 @@
 *.7z
 *.iso
 *.rar
+*.pubxml
 
 # User-specific files
 TODO.txt
